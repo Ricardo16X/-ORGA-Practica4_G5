@@ -14,15 +14,16 @@ import javax.swing.JOptionPane;
  */
 public class LogIn extends javax.swing.JFrame {
     
-    public static Administrador admin;
-    public static LinkedList<Jugador> users;
+    public static Administrador admin = new Administrador("Admin_ORGA","12345");
+    public static LinkedList<Jugador> users = admin.getListaJugadores();
+    
+    
     /**
      * Creates new form LogIn
      */
     public LogIn() {
         initComponents();
-        admin =new Administrador("Admin_ORGA","12345");
-        users = admin.getListaJugadores();
+        
     }
 
     /**
@@ -58,6 +59,11 @@ public class LogIn extends javax.swing.JFrame {
         });
 
         jButton2.setText("Registrarse");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,6 +137,13 @@ public class LogIn extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"El usuario ingresado no existe!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        RegistroForm registro = new RegistroForm();
+        this.dispose();
+        registro.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
