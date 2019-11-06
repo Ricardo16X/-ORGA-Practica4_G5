@@ -16,6 +16,7 @@ public class AdminForm extends javax.swing.JFrame {
      */
     public AdminForm() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

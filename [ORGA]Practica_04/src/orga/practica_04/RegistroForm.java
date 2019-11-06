@@ -19,6 +19,7 @@ public class RegistroForm extends javax.swing.JFrame {
      */
     public RegistroForm() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
