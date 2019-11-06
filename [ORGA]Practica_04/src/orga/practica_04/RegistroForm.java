@@ -114,15 +114,20 @@ public class RegistroForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username;
         String password;
-        for(Jugador j:LogIn.users){
+        for(Jugador j:LogIn.admin.getListaJugadores()){
             if(j.getUsername().equals(tf_username.getText())){
                 JOptionPane.showMessageDialog(null,"El usuario ingresado ya existe!");
+                tf_username.setText("");
+                tf_password_1.setText("");
+                tf_password_2.setText("");
                 return;
             }
         }
         if(Arrays.toString(tf_password_1.getPassword()).equals(Arrays.toString(tf_password_2.getPassword()))){
             username = tf_username.getText();
             password = Arrays.toString(tf_password_1.getPassword());
+            LogIn.admin.getListaJugadores().add(new Jugador(username,password));
+            System.out.println(LogIn.admin.getListaJugadores().getFirst().getUsername());
             JOptionPane.showMessageDialog(null,"La solicitud se ha enviado al administrador, en breve tendra acceso!");
             LogIn login = new LogIn();
             this.dispose();

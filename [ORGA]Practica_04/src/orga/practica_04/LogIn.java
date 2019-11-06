@@ -5,6 +5,7 @@
  */
 package orga.practica_04;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
 public class LogIn extends javax.swing.JFrame {
     
     public static Administrador admin = new Administrador("Admin_ORGA","12345");
-    public static LinkedList<Jugador> users = admin.getListaJugadores();
+    //public static LinkedList<Jugador> users = admin.getListaJugadores();
     
     
     /**
@@ -120,19 +121,26 @@ public class LogIn extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String username = tf_username.getText();
-        String password = tf_password.getText();
+        String password = Arrays.toString(tf_password.getPassword());
         if(username.equals(LogIn.admin.getUsername()) && password.equals(LogIn.admin.getPassword())){
             AdminForm admin_form = new AdminForm();
             this.dispose();
             admin_form.setVisible(true);
         }else{
             for(Jugador j: LogIn.admin.getListaJugadores()){
+                int a = 0;
                 if(j.getUsername().equals(username) && j.getPassword().equals(password)){
-                    PlayerForm player_form = new PlayerForm();
-                    this.dispose();
-                    player_form.setVisible(true);
+                    if(LogIn.admin.getListaJugadores().get(a).isEstado()==true){
+                        PlayerForm player_form = new PlayerForm();
+                        this.dispose();
+                        player_form.setVisible(true);
+                        
+                    }else{
+                        JOptionPane.showMessageDialog(null,"La solicitud del judaor aún no ha sido aprovada por el administador!");
+                    }
                     return;
                 }
+                a++;
             }
             JOptionPane.showMessageDialog(null,"El usuario ingresado no existe!");
         }
