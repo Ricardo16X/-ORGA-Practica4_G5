@@ -18,7 +18,8 @@ public class ORGAPractica_04 {
         // TODO code application logic here
         
         //Instancia de la ventana principal del juego:
-        
+        LogIn loginInicio = new LogIn();
+        loginInicio.setVisible(true);
     }
     
 }

@@ -18,7 +18,7 @@ public class Administrador extends Usuario {
     
     public Administrador (String username,String password){
         super(username,password);
-        this.listaJugadores = null;
+        this.listaJugadores = new LinkedList<>();
     }
 
     public LinkedList<Jugador> getListaJugadores() {
