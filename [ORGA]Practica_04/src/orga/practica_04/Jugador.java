@@ -14,12 +14,15 @@ public class Jugador extends Usuario {
     private float tiempo;
     private int puntos;
     private int nivel;
+    private boolean estado; /*(estado) Este atributo indica si se ha aceptado la solicitud 
+    por parte del administrador*/
     
     public Jugador(String username,String password){
         super(username,password);
         this.tiempo = 0;
         this.puntos = 0;
         this.nivel = 1;
+        this.estado = false;
     }
 
     public float getTiempo() {
@@ -44,6 +47,14 @@ public class Jugador extends Usuario {
 
     public void setNivel(int nivel) {
         this.nivel = nivel;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     
     
