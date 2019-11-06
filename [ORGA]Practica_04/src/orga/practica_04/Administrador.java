@@ -12,7 +12,8 @@ import java.util.LinkedList;
  * @author aiyel
  */
 public class Administrador extends Usuario {
-    
+    /*Esta lista tendra a todos los jugadores en la aplicacion junto con sus datos
+    con esta lista se podran aceptar las solicitudes de registro*/
     private LinkedList<Jugador> listaJugadores;
     
     public Administrador (String username,String password){
