@@ -7,7 +7,6 @@ package orga.practica_04;
 
 import java.awt.Image;
 import java.util.Arrays;
-import java.util.LinkedList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -137,16 +136,20 @@ public class LogIn extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String username = tf_username.getText();
-        String password = Arrays.toString(tf_password.getPassword());
-        if(username.equals(LogIn.admin.getUsername()) && password.equals(LogIn.admin.getPassword())){
+        char letras[] = tf_password.getPassword();
+        // Obtener la contraseña mediante el array.tostring();
+        String password = "";
+        for (char caracter : letras) {
+            password += caracter;
+        }
+        if(tf_username.getText().equals(LogIn.admin.getUsername()) && password.equals(LogIn.admin.getPassword())){
             AdminForm admin_form = new AdminForm();
             this.dispose();
             admin_form.setVisible(true);
         }else{
             for(Jugador j: LogIn.admin.getListaJugadores()){
                 int a = 0;
-                if(j.getUsername().equals(username) && j.getPassword().equals(password)){
+                if(j.getUsername().equals(tf_username.getText()) && j.getPassword().equals(password)){
                     if(LogIn.admin.getListaJugadores().get(a).isEstado()==true){
                         PlayerForm player_form = new PlayerForm();
                         this.dispose();

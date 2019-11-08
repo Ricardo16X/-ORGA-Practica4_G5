@@ -13,13 +13,15 @@ import javax.swing.JOptionPane;
  * @author aiyel
  */
 public class RegistroForm extends javax.swing.JFrame {
-
+    LogIn inicio_sesion;
     /**
      * Creates new form Registro
      */
     public RegistroForm() {
         initComponents();
         this.setLocationRelativeTo(null);
+        inicio_sesion = new LogIn();
+        inicio_sesion.setVisible(false);
     }
 
     /**
@@ -40,8 +42,13 @@ public class RegistroForm extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setText("Nombre de Usuario");
 
@@ -143,6 +150,11 @@ public class RegistroForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Verifica que todos los campos sean llenados...");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        inicio_sesion.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
