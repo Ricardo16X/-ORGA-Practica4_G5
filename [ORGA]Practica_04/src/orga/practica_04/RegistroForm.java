@@ -110,31 +110,37 @@ public class RegistroForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+    @SuppressWarnings("deprecation")
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String username;
-        String password;
-        for(Jugador j:LogIn.admin.getListaJugadores()){
-            if(j.getUsername().equals(tf_username.getText())){
-                JOptionPane.showMessageDialog(null,"El usuario ingresado ya existe!");
-                tf_username.setText("");
-                tf_password_1.setText("");
-                tf_password_2.setText("");
-                return;
+        if (!tf_username.getText().isEmpty() && !tf_password_1.getText().isEmpty() && !tf_password_2.getText().isEmpty()) {
+            String username;
+            String password;
+            for (Jugador j : LogIn.admin.getListaJugadores()) {
+                if (j.getUsername().equals(tf_username.getText())) {
+                    JOptionPane.showMessageDialog(null, "El usuario ingresado ya existe!");
+                    tf_username.setText("");
+                    tf_password_1.setText("");
+                    tf_password_2.setText("");
+                    return;
+                }
             }
-        }
-        if(Arrays.toString(tf_password_1.getPassword()).equals(Arrays.toString(tf_password_2.getPassword()))){
-            username = tf_username.getText();
-            password = Arrays.toString(tf_password_1.getPassword());
-            LogIn.admin.getListaJugadores().add(new Jugador(username,password));
-            System.out.println(LogIn.admin.getListaJugadores().getFirst().getUsername());
-            JOptionPane.showMessageDialog(null,"La solicitud se ha enviado al administrador, en breve tendra acceso!");
-            LogIn login = new LogIn();
-            this.dispose();
-            login.setVisible(true);
+            if (Arrays.toString(tf_password_1.getPassword()).equals(Arrays.toString(tf_password_2.getPassword()))) {
+                username = tf_username.getText();
+                password = Arrays.toString(tf_password_1.getPassword());
+                LogIn.admin.getListaJugadores().add(new Jugador(username, password));
+                System.out.println(LogIn.admin.getListaJugadores().getFirst().getUsername());
+                JOptionPane.showMessageDialog(null, "La solicitud se ha enviado al administrador, en breve tendra acceso!");
+                LogIn login = new LogIn();
+                this.dispose();
+                login.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Las contraseña ingresadas no coinciden!");
+            }
         }else{
-            JOptionPane.showMessageDialog(null,"Las contraseña ingresadas no coinciden!");
+            JOptionPane.showMessageDialog(null, "Verifica que todos los campos sean llenados...");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -168,6 +174,7 @@ public class RegistroForm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new RegistroForm().setVisible(true);
             }

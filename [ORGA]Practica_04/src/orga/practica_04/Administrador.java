@@ -28,7 +28,4 @@ public class Administrador extends Usuario {
     public void setListaJugadores(LinkedList<Jugador> listaJugadores) {
         this.listaJugadores = listaJugadores;
     }
-    
-    
-    
 }
