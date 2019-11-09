@@ -28,4 +28,18 @@ public class Administrador extends Usuario {
     public void setListaJugadores(LinkedList<Jugador> listaJugadores) {
         this.listaJugadores = listaJugadores;
     }
+    
+    public String[] getTopPuntos(){
+        String []a;
+        a = new String[this.listaJugadores.size()];
+        
+        return a;
+    }
+    
+    public String[] getTopTiempos(){
+        String[] a;
+        a = new String[this.listaJugadores.size()];
+        
+        return a;
+    }
 }
