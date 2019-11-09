@@ -121,7 +121,9 @@ public class LogIn extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String username = tf_username.getText();
-        String password = Arrays.toString(tf_password.getPassword());
+        String password = tf_password.getText();
+        //System.out.println("username:"+username+" , admin:"+admin.getUsername());
+        //System.out.println("password:"+password+", admin:"+admin.getPassword());
         if(username.equals(LogIn.admin.getUsername()) && password.equals(LogIn.admin.getPassword())){
             AdminForm admin_form = new AdminForm();
             this.dispose();
@@ -136,13 +138,13 @@ public class LogIn extends javax.swing.JFrame {
                         player_form.setVisible(true);
                         
                     }else{
-                        JOptionPane.showMessageDialog(null,"La solicitud del judaor aún no ha sido aprovada por el administador!");
+                        JOptionPane.showMessageDialog(null,"La solicitud del jugador aún no ha sido aprovada por el administador!");
                     }
                     return;
                 }
                 a++;
             }
-            JOptionPane.showMessageDialog(null,"El usuario ingresado no existe!");
+            JOptionPane.showMessageDialog(null,"El usuario ingresado no existe o la contraseña es incorrecta!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

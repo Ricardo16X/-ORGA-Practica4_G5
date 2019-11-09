@@ -126,7 +126,7 @@ public class RegistroForm extends javax.swing.JFrame {
         }
         if(Arrays.toString(tf_password_1.getPassword()).equals(Arrays.toString(tf_password_2.getPassword()))){
             username = tf_username.getText();
-            password = Arrays.toString(tf_password_1.getPassword());
+            password = tf_password_1.getText();
             LogIn.admin.getListaJugadores().add(new Jugador(username,password));
             System.out.println(LogIn.admin.getListaJugadores().getFirst().getUsername());
             JOptionPane.showMessageDialog(null,"La solicitud se ha enviado al administrador, en breve tendra acceso!");
