@@ -5,6 +5,8 @@
  */
 package orga.practica_04;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aiyel
@@ -17,6 +19,32 @@ public class VerUsuarioForm extends javax.swing.JFrame {
     public VerUsuarioForm() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    public void desplegarLista(){
+        int a = LogIn.admin.getListaJugadores().size();
+        String[] b = new String[a];
+        int c = 0;
+        System.out.println(a);
+        if(!LogIn.admin.getListaJugadores().isEmpty()){
+            for(Jugador j: LogIn.admin.getListaJugadores()){
+                b[c] = j.getUsername();
+                c++;
+            }
+        }
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            //String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return b.length; }
+            public String getElementAt(int i) { return b[i]; }
+            });
+        
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+            jList1ValueChanged(evt);
+            }
+        });
+        
+        jList1.repaint();
     }
 
     /**
@@ -41,6 +69,11 @@ public class VerUsuarioForm extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("VER DETALLES DE USUARIOS");
@@ -50,11 +83,26 @@ public class VerUsuarioForm extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jButton1.setText("Mostrar Detalles");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Regresar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Nombre de Usuario");
 
@@ -115,6 +163,31 @@ public class VerUsuarioForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        desplegarLista();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        AdminForm ad = new AdminForm();
+        this.dispose();
+        ad.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(!jList1.isSelectionEmpty()){
+            
+        }else{
+            JOptionPane.showMessageDialog(null,"Selecciona a un usuario para ver sus detalles!");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jList1ValueChanged
 
     /**
      * @param args the command line arguments
