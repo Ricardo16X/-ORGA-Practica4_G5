@@ -13,13 +13,15 @@ import javax.swing.JOptionPane;
  * @author aiyel
  */
 public class RegistroForm extends javax.swing.JFrame {
-
+    LogIn inicio_sesion;
     /**
      * Creates new form Registro
      */
     public RegistroForm() {
         initComponents();
         this.setLocationRelativeTo(null);
+        inicio_sesion = new LogIn();
+        inicio_sesion.setVisible(false);
     }
 
     /**
@@ -40,8 +42,13 @@ public class RegistroForm extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setText("Nombre de Usuario");
 
@@ -110,19 +117,36 @@ public class RegistroForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+    @SuppressWarnings("deprecation")
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String username;
-        String password;
-        for(Jugador j:LogIn.admin.getListaJugadores()){
-            if(j.getUsername().equals(tf_username.getText())){
-                JOptionPane.showMessageDialog(null,"El usuario ingresado ya existe!");
-                tf_username.setText("");
-                tf_password_1.setText("");
-                tf_password_2.setText("");
-                return;
+        if (!tf_username.getText().isEmpty() && !tf_password_1.getText().isEmpty() && !tf_password_2.getText().isEmpty()) {
+            String username;
+            String password;
+            for (Jugador j : LogIn.admin.getListaJugadores()) {
+                if (j.getUsername().equals(tf_username.getText())) {
+                    JOptionPane.showMessageDialog(null, "El usuario ingresado ya existe!");
+                    tf_username.setText("");
+                    tf_password_1.setText("");
+                    tf_password_2.setText("");
+                    return;
+                }
             }
+            if (Arrays.toString(tf_password_1.getPassword()).equals(Arrays.toString(tf_password_2.getPassword()))) {
+                username = tf_username.getText();
+                password = Arrays.toString(tf_password_1.getPassword());
+                LogIn.admin.getListaJugadores().add(new Jugador(username, password));
+                System.out.println(LogIn.admin.getListaJugadores().getFirst().getUsername());
+                JOptionPane.showMessageDialog(null, "La solicitud se ha enviado al administrador, en breve tendra acceso!");
+                LogIn login = new LogIn();
+                this.dispose();
+                login.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Las contraseña ingresadas no coinciden!");
+            }
+<<<<<<< HEAD
         }
         if(Arrays.toString(tf_password_1.getPassword()).equals(Arrays.toString(tf_password_2.getPassword()))){
             username = tf_username.getText();
@@ -133,10 +157,17 @@ public class RegistroForm extends javax.swing.JFrame {
             LogIn login = new LogIn();
             this.dispose();
             login.setVisible(true);
+=======
+>>>>>>> d354d82930d54be8685763779fe48dcdfdf1be57
         }else{
-            JOptionPane.showMessageDialog(null,"Las contraseña ingresadas no coinciden!");
+            JOptionPane.showMessageDialog(null, "Verifica que todos los campos sean llenados...");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        inicio_sesion.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -168,6 +199,7 @@ public class RegistroForm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new RegistroForm().setVisible(true);
             }
