@@ -122,9 +122,10 @@ public class RegistroForm extends javax.swing.JFrame {
     @SuppressWarnings("deprecation")
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String username;
+        String password;
         if (!tf_username.getText().isEmpty() && !tf_password_1.getText().isEmpty() && !tf_password_2.getText().isEmpty()) {
-            String username;
-            String password;
+            
             for (Jugador j : LogIn.admin.getListaJugadores()) {
                 if (j.getUsername().equals(tf_username.getText())) {
                     JOptionPane.showMessageDialog(null, "El usuario ingresado ya existe!");
@@ -146,7 +147,7 @@ public class RegistroForm extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Las contraseña ingresadas no coinciden!");
             }
-<<<<<<< HEAD
+//<<<<<<< HEAD
         }
         if(Arrays.toString(tf_password_1.getPassword()).equals(Arrays.toString(tf_password_2.getPassword()))){
             username = tf_username.getText();
@@ -157,8 +158,7 @@ public class RegistroForm extends javax.swing.JFrame {
             LogIn login = new LogIn();
             this.dispose();
             login.setVisible(true);
-=======
->>>>>>> d354d82930d54be8685763779fe48dcdfdf1be57
+
         }else{
             JOptionPane.showMessageDialog(null, "Verifica que todos los campos sean llenados...");
         }

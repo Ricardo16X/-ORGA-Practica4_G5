@@ -5,9 +5,6 @@
  */
 package orga.practica_04;
 
-import java.awt.Image;
-import java.util.Arrays;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,11 +12,10 @@ import javax.swing.JOptionPane;
  * @author aiyel
  */
 public class LogIn extends javax.swing.JFrame {
+
     
     public static Administrador admin = new Administrador("Admin_ORGA","12345");
-    //public static LinkedList<Jugador> users = admin.getListaJugadores();
-    
-    
+
     /**
      * Creates new form LogIn
      */
@@ -40,22 +36,17 @@ public class LogIn extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tf_username = new javax.swing.JTextField();
+        tf_password = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        tf_password = new javax.swing.JPasswordField();
-        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Users - Login");
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setSize(new java.awt.Dimension(800, 600));
 
         jLabel1.setText("Nombre de Usuario");
 
         jLabel2.setText("Contraseña");
 
-        jButton1.setText("Iniciar Sesión");
+        jButton1.setText("Ingresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -69,66 +60,43 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Image imagen = new ImageIcon(getClass().getResource("/orga/practica_04/log.png")).getImage();
-        ImageIcon redim = new ImageIcon(imagen.getScaledInstance(100,100, Image.SCALE_SMOOTH));
-        jLabel3.setIcon(redim);
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        jLabel5.setText("Viborita Serial");
-        jLabel5.setToolTipText("");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(246, 246, 246))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tf_password, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(215, 215, 215)))
-                        .addGap(78, 78, 78))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(37, 37, 37))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(132, 132, 132))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(119, 119, 119))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(134, 134, 134)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_password)
+                            .addComponent(tf_username))))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(152, 152, 152)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(tf_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,21 +104,10 @@ public class LogIn extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
         String username = tf_username.getText();
         String password = tf_password.getText();
-        //System.out.println("username:"+username+" , admin:"+admin.getUsername());
-        //System.out.println("password:"+password+", admin:"+admin.getPassword());
+        
         if(username.equals(LogIn.admin.getUsername()) && password.equals(LogIn.admin.getPassword())){
-=======
-        char letras[] = tf_password.getPassword();
-        // Obtener la contraseña mediante el array.tostring();
-        String password = "";
-        for (char caracter : letras) {
-            password += caracter;
-        }
-        if(tf_username.getText().equals(LogIn.admin.getUsername()) && password.equals(LogIn.admin.getPassword())){
->>>>>>> d354d82930d54be8685763779fe48dcdfdf1be57
             AdminForm admin_form = new AdminForm();
             this.dispose();
             admin_form.setVisible(true);
@@ -171,6 +128,7 @@ public class LogIn extends javax.swing.JFrame {
                 a++;
             }
             JOptionPane.showMessageDialog(null,"El usuario ingresado no existe o la contraseña es incorrecta!");
+        
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -221,8 +179,6 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField tf_password;
     private javax.swing.JTextField tf_username;
     // End of variables declaration//GEN-END:variables
