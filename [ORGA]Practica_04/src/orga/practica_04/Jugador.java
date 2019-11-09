@@ -49,7 +49,7 @@ public class Jugador extends Usuario {
         this.nivel = nivel;
     }
 
-    public boolean isEstado() {
+    public boolean isAceptado() {
         return estado;
     }
 

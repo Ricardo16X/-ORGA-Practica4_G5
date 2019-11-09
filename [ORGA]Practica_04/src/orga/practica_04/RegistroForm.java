@@ -13,15 +13,15 @@ import javax.swing.JOptionPane;
  * @author aiyel
  */
 public class RegistroForm extends javax.swing.JFrame {
-    LogIn inicio_sesion;
+    //LogIn inicio_sesion;
     /**
      * Creates new form Registro
      */
     public RegistroForm() {
         initComponents();
         this.setLocationRelativeTo(null);
-        inicio_sesion = new LogIn();
-        inicio_sesion.setVisible(false);
+        //inicio_sesion = new LogIn();
+        //inicio_sesion.setVisible(false);
     }
 
     /**
@@ -154,7 +154,7 @@ public class RegistroForm extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        inicio_sesion.setVisible(true);
+        //inicio_sesion.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
 
     /**

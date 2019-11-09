@@ -111,6 +111,29 @@ public class AprovarForm extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here: Aqui se carga los usuario a aprovar
         
+        int a = LogIn.admin.getListaJugadores().size();
+        String[] b = new String[a];
+        int c = 0;
+        System.out.println(a);
+        if(!LogIn.admin.getListaJugadores().isEmpty()){
+            for(Jugador j: LogIn.admin.getListaJugadores()){
+                if(!j.isAceptado()){
+                    b[c] = j.getUsername();
+                    c++;
+                }
+            }
+        }
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            //String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return b.length; }
+            public String getElementAt(int i) { return b[i]; }
+            });
+        
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+            jList1ValueChanged(evt);
+            }
+        });
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -132,7 +155,7 @@ public class AprovarForm extends javax.swing.JFrame {
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         // TODO add your handling code here:
-        if(!jList1.isSelectionEmpty()){
+        if(!jList1.isSelectionEmpty() & jList1.getModel().getSize()!=0){
             jButton1.setEnabled(true);
         }else{
             jButton1.setEnabled(false);

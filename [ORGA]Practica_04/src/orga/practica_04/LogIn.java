@@ -115,7 +115,7 @@ public class LogIn extends javax.swing.JFrame {
             for(Jugador j: LogIn.admin.getListaJugadores()){
                 int a = 0;
                 if(j.getUsername().equals(tf_username.getText()) && j.getPassword().equals(password)){
-                    if(LogIn.admin.getListaJugadores().get(a).isEstado()==true){
+                    if(LogIn.admin.getListaJugadores().get(a).isAceptado()==true){
                         PlayerForm player_form = new PlayerForm();
                         this.dispose();
                         player_form.setVisible(true);
