@@ -5,6 +5,9 @@
  */
 package orga.practica_04;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aiyel
@@ -83,6 +86,11 @@ public class EliminarUsuarioForm extends javax.swing.JFrame {
         jLabel1.setText("ELIMINAR USUARIO");
 
         jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Regresar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +148,31 @@ public class EliminarUsuarioForm extends javax.swing.JFrame {
         this.dispose();
         ad.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(!jList1.isSelectionEmpty()){
+            String b = jList1.getSelectedValue();
+            int contador = 0;
+            for(Jugador j: LogIn.admin.getListaJugadores()){
+                if(j.getUsername().equals(b)){
+                    JOptionPane confirm = new JOptionPane("¿Está de seguro que desea eliminar este usuario?",
+                    JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
+                    JDialog answer = confirm.createDialog(null, "Eliminar Jugadores");
+                    answer.setVisible(true);
+                    if(Integer.parseInt(confirm.getValue().toString())==JOptionPane.YES_OPTION){
+                        LogIn.admin.getListaJugadores().remove(contador);
+                        desplegarLista();
+                    }
+                    
+                    return;
+                }
+                contador ++;
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"Selecciona un usuario para eliminar!");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
