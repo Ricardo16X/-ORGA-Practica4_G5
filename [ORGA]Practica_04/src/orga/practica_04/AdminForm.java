@@ -47,6 +47,11 @@ public class AdminForm extends javax.swing.JFrame {
         jButton2.setText("TOP10 PUNTOS");
 
         jButton3.setText("ELIMINAR USUARIO");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("CONFIRMAR USUARIO");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +135,13 @@ public class AdminForm extends javax.swing.JFrame {
         this.dispose();
         apf.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        EliminarUsuarioForm a = new EliminarUsuarioForm();
+        this.dispose();
+        a.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

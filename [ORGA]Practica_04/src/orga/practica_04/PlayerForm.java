@@ -16,6 +16,7 @@ public class PlayerForm extends javax.swing.JFrame {
      */
     public PlayerForm() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
