@@ -15,7 +15,7 @@ public class LogIn extends javax.swing.JFrame {
 
     
     public static Administrador admin = new Administrador("Admin_ORGA","12345");
-    public static Jugador loggedPlsyer;
+    public static Jugador loggedPlayer;
     /**
      * Creates new form LogIn
      */
@@ -118,6 +118,7 @@ public class LogIn extends javax.swing.JFrame {
                     if(LogIn.admin.getListaJugadores().get(a).isAceptado()==true){
                         PlayerForm player_form = new PlayerForm();
                         this.dispose();
+                        loggedPlayer = j;
                         player_form.setVisible(true);
                         
                     }else{
