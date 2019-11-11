@@ -30,16 +30,65 @@ public class Administrador extends Usuario {
     }
     
     public String[] getTopPuntos(){
-        String []a;
-        a = new String[this.listaJugadores.size()];
-        
+        Jugador[] lista = new Jugador[this.listaJugadores.size()];
+        int contador = 0;
+        for(Jugador j:this.listaJugadores){
+            lista[contador] = j;
+            contador ++;
+        }
+        Jugador[] ordenado = ordenarTopPuntos(lista);
+        String[] a = new String [10];
+        for(int n =0; n<10 ;n++){
+            a[n] = "player:"+ordenado[n].getUsername() +" score:"+ordenado[n].getPuntos();
+        }
         return a;
     }
     
+    private Jugador[] ordenarTopPuntos(Jugador[] arreglo){
+      int auxiliar;
+      Jugador[] arregloOrdenado;
+      for(int i = 2; i < arreglo.length; i++)
+      {
+        for(int j = 0;j < arreglo.length-i;j++)
+        {
+          if(arreglo[j].getPuntos() > arreglo[j+1].getPuntos())
+          {
+            auxiliar = arreglo[j].getPuntos();
+            arreglo[j] = arreglo[j+1];
+            arreglo[j+1].setPuntos(auxiliar);
+          }   
+        }
+      }
+      arregloOrdenado = arreglo;
+      return arregloOrdenado;
+    }
+    
     public String[] getTopTiempos(){
-        String[] a;
-        a = new String[this.listaJugadores.size()];
-        
-        return a;
+        float[] a = new float[this.listaJugadores.size()];
+        int contador = 0;
+        for(Jugador j: this.listaJugadores){
+            a[contador] = j.getTiempo();
+            contador ++;
+        }
+        return ordenarTopTiempos(a);
+    }
+    
+    public float[] ordenarTopTiempos(float[] arreglo){
+      float auxiliar;
+      float[] arregloOrdenado;
+      for(int i = 2; i < arreglo.length; i++)
+      {
+        for(int j = 0;j < arreglo.length-i;j++)
+        {
+          if(arreglo[j] > arreglo[j+1])
+          {
+            auxiliar = arreglo[j];
+            arreglo[j] = arreglo[j+1];
+            arreglo[j+1] = auxiliar;
+          }   
+        }
+      }
+      arregloOrdenado = arreglo;
+      return arregloOrdenado;
     }
 }
