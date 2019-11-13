@@ -5,17 +5,98 @@
  */
 package orga.practica_04;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import static java.lang.Thread.sleep;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import pruebas.Hilo_Snake;
+
 /**
  *
  * @author aiyel
  */
 public class GameBoard extends javax.swing.JFrame {
 
+    JLabel[][] matriz = new JLabel[12][12];
+    JLabel matriz1 = new JLabel();
+    ArrayList<JLabel> Snake1 = new ArrayList<>();
+    JLabel[] ZZZ = new JLabel[144]; 
+    Hilo_Snake HP;
+    Color snake = Color.green;
+    Color obstaculos = Color.blue;
+    int nivel = 1;
+    int puntaje = 0;
+    int contador = 1;
+    int enX = (int) (Math.random()*12);
+    int enY = (int) (Math.random()*12);
+    boolean contador1 = true;
+    JButton botonsito = new JButton();
     /**
      * Creates new form GameBoard
      */
     public GameBoard() {
         initComponents();
+        matriz1.setBounds(5, 5+37*5, 35, 35);
+        matriz1.setOpaque(true);
+        matriz1.setBackground(snake);
+        this.add(matriz1);
+        animacion(Snake1);
+        HP = new Hilo_Snake(matriz1,1,Snake1,snake);
+        HP.start();
+        System.out.println("el tamano es: " + Snake1.size());
+        MostrarMatriz();
+        personaje();
+        
+        this.addKeyListener( new KeyListener(){
+            @Override
+            public void keyTyped(KeyEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {//Adelante
+                    System.out.println("Adelante");
+                    HP.setMovimiento(1);
+                }
+                if(e.getKeyCode() == KeyEvent.VK_DOWN){
+                    System.out.println("Abajo");
+                    HP.setMovimiento(2);
+                }
+                if(e.getKeyCode() == KeyEvent.VK_UP){
+                    System.out.println("Arriba");
+                    HP.setMovimiento(3);
+                }
+                if(e.getKeyCode() == KeyEvent.VK_LEFT){
+                    System.out.println("Izquierda");
+                    HP.setMovimiento(4);
+                }
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    System.out.println("Comi algo");
+                    HP.setComida(5);
+                    animacion(HP.getSnake());
+                    //MostrarMatriz();
+                    //personaje();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                
+            }
+            
+        });
+        
+        //bocado();
         this.setLocationRelativeTo(null);
     }
 
@@ -29,16 +110,17 @@ public class GameBoard extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 806, Short.MAX_VALUE)
+            .addGap(0, 524, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
+            .addGap(0, 524, Short.MAX_VALUE)
         );
 
         pack();
@@ -79,6 +161,181 @@ public class GameBoard extends javax.swing.JFrame {
         });
     }
 
+    private void MostrarMatriz() {
+        int tamanio=35, posx=5, posy=5;
+        Color c = Color.white;
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                matriz[i][j] = new JLabel();
+                matriz[i][j].setBounds(posx, posy, tamanio, tamanio);
+                matriz[i][j].setOpaque(true);
+                matriz[i][j].setBackground(c);
+                this.add(matriz[i][j]);
+                posy = posy + 37;
+            }
+            posx = posx + 37;
+            posy = 5;
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    private void personaje() {
+        obstaculos();
+        //animacion();
+    }
+
+    private void obstaculos() {
+        switch (nivel) {
+            case 1:
+                pintar1();
+                break;
+            case 2:
+                pintar2();
+                break;
+            case 3:
+                pintar3();
+                break;
+            default:
+                break;
+        }
+        
+    }
+    
+    private void limpiar(){
+        Color c = Color.white;
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                if(matriz[i][j].getBackground() == obstaculos){
+                    matriz[i][j].setBackground(c);
+                }
+            }
+        }
+    }
+
+    private void pintar1() {
+        limpiar();
+        matriz[0][0].setBackground(obstaculos);
+        matriz[0][1].setBackground(obstaculos);
+        matriz[0][2].setBackground(obstaculos);
+        matriz[0][3].setBackground(obstaculos);
+        matriz[1][0].setBackground(obstaculos);
+        matriz[2][0].setBackground(obstaculos);
+        matriz[3][0].setBackground(obstaculos);
+        
+        matriz[11][0].setBackground(obstaculos);
+        matriz[10][0].setBackground(obstaculos);
+        matriz[9][0].setBackground(obstaculos);
+        matriz[8][0].setBackground(obstaculos);
+        matriz[11][1].setBackground(obstaculos);
+        matriz[11][2].setBackground(obstaculos);
+        matriz[11][3].setBackground(obstaculos);
+        
+        matriz[11][11].setBackground(obstaculos);
+        matriz[11][10].setBackground(obstaculos);
+        matriz[11][9].setBackground(obstaculos);
+        matriz[11][8].setBackground(obstaculos);
+        matriz[10][11].setBackground(obstaculos);
+        matriz[9][11].setBackground(obstaculos);
+        matriz[8][11].setBackground(obstaculos);
+        
+        matriz[0][11].setBackground(obstaculos);
+        matriz[1][11].setBackground(obstaculos);
+        matriz[2][11].setBackground(obstaculos);
+        matriz[3][11].setBackground(obstaculos);
+        matriz[0][10].setBackground(obstaculos);
+        matriz[0][9].setBackground(obstaculos);
+        matriz[0][8].setBackground(obstaculos);
+    }
+
+    private void pintar2() {
+        limpiar();
+        matriz[0][0].setBackground(obstaculos);
+        matriz[0][1].setBackground(obstaculos);
+        matriz[0][2].setBackground(obstaculos);
+        matriz[0][3].setBackground(obstaculos);
+        
+        matriz[11][1].setBackground(obstaculos);
+        matriz[11][2].setBackground(obstaculos);
+        matriz[11][3].setBackground(obstaculos);
+        matriz[11][0].setBackground(obstaculos);
+        
+        matriz[11][11].setBackground(obstaculos);
+        matriz[11][10].setBackground(obstaculos);
+        matriz[11][9].setBackground(obstaculos);
+        matriz[11][8].setBackground(obstaculos);
+        
+        matriz[0][11].setBackground(obstaculos);
+        matriz[0][10].setBackground(obstaculos);
+        matriz[0][9].setBackground(obstaculos);
+        matriz[0][8].setBackground(obstaculos);
+        
+        matriz[4][2].setBackground(obstaculos);
+        matriz[5][2].setBackground(obstaculos);
+        matriz[6][2].setBackground(obstaculos);
+        matriz[7][2].setBackground(obstaculos);
+        
+        matriz[4][9].setBackground(obstaculos);
+        matriz[5][9].setBackground(obstaculos);
+        matriz[6][9].setBackground(obstaculos);
+        matriz[7][9].setBackground(obstaculos);
+    }
+
+    private void pintar3() {
+        limpiar();
+        matriz[0][0].setBackground(obstaculos);
+        matriz[0][1].setBackground(obstaculos);
+        matriz[0][2].setBackground(obstaculos);
+        matriz[0][3].setBackground(obstaculos);
+        matriz[1][0].setBackground(obstaculos);
+        matriz[2][0].setBackground(obstaculos);
+        matriz[3][0].setBackground(obstaculos);
+        
+        matriz[11][0].setBackground(obstaculos);
+        matriz[10][0].setBackground(obstaculos);
+        matriz[9][0].setBackground(obstaculos);
+        matriz[8][0].setBackground(obstaculos);
+        matriz[11][1].setBackground(obstaculos);
+        matriz[11][2].setBackground(obstaculos);
+        matriz[11][3].setBackground(obstaculos);
+        
+        matriz[11][11].setBackground(obstaculos);
+        matriz[11][10].setBackground(obstaculos);
+        matriz[11][9].setBackground(obstaculos);
+        matriz[11][8].setBackground(obstaculos);
+        matriz[10][11].setBackground(obstaculos);
+        matriz[9][11].setBackground(obstaculos);
+        matriz[8][11].setBackground(obstaculos);
+        
+        matriz[0][11].setBackground(obstaculos);
+        matriz[1][11].setBackground(obstaculos);
+        matriz[2][11].setBackground(obstaculos);
+        matriz[3][11].setBackground(obstaculos);
+        matriz[0][10].setBackground(obstaculos);
+        matriz[0][9].setBackground(obstaculos);
+        matriz[0][8].setBackground(obstaculos);
+        
+        for (int i = 3; i < 9; i++) {
+            if(i!=5){
+                matriz[3][i].setBackground(obstaculos);
+                matriz[8][i].setBackground(obstaculos);
+            }
+        }
+    }
+
+    private void bocado() {
+        if(matriz[enX][enY].getBackground() == obstaculos){
+            enX = (int) (Math.random()*12);
+            enY = (int) (Math.random()*12);
+            bocado();
+        }else{
+            matriz[enX][enY].setBackground(Color.orange);
+        }
+    }
+
+    private void animacion(ArrayList<JLabel> _snake1) {
+        
+    }
+    
 }

@@ -37,25 +37,25 @@ public class Administrador extends Usuario {
             contador ++;
         }
         Jugador[] ordenado = ordenarTopPuntos(lista);
-        String[] a = new String [ordenado.length];
-        for(int n =0; n<ordenado.length ;n++){
+        String[] a = new String [10];
+        for(int n =0; n<10 ;n++){
             a[n] = "player:"+ordenado[n].getUsername() +" score:"+ordenado[n].getPuntos();
         }
         return a;
     }
     
     private Jugador[] ordenarTopPuntos(Jugador[] arreglo){
-      Jugador auxiliar;
+      int auxiliar;
       Jugador[] arregloOrdenado;
-      for(int i = 1; i < arreglo.length; i++)
+      for(int i = 2; i < arreglo.length; i++)
       {
         for(int j = 0;j < arreglo.length-i;j++)
         {
           if(arreglo[j].getPuntos() > arreglo[j+1].getPuntos())
           {
-            auxiliar = arreglo[j];
+            auxiliar = arreglo[j].getPuntos();
             arreglo[j] = arreglo[j+1];
-            arreglo[j+1] = auxiliar;
+            arreglo[j+1].setPuntos(auxiliar);
           }   
         }
       }
@@ -63,31 +63,28 @@ public class Administrador extends Usuario {
       return arregloOrdenado;
     }
     
-    public String[] getTopTiempos(){
-        Jugador[] lista = new Jugador[this.listaJugadores.size()];
+    public float[] getTopTiempos(){
+        float[] a = new float[this.listaJugadores.size()];
         int contador = 0;
-        for(Jugador j:this.listaJugadores){
-            lista[contador] = j;
+        for(Jugador j: this.listaJugadores){
+            a[contador] = j.getTiempo();
             contador ++;
         }
-        Jugador[] ordenado = ordenarTopPuntos(lista);
-        String[] a = new String [ordenado.length];
-        for(int n =0; n<ordenado.length ;n++){
-            a[n] = "player:"+ordenado[n].getUsername() +" timpo:"+ordenado[n].getTiempo();
-        }
-        return a;
+        return ordenarTopTiempos(a);
     }
     
-    public Jugador[] ordenarTopTiempos(Jugador[] arreglo){
-      Jugador auxiliar;
-      Jugador[] arregloOrdenado;
-      for(int i = 0; i < arreglo.length-1; i++){
-        for(int j = 0;j < arreglo.length-i-1;j++){
-          if((int)arreglo[j+1].getTiempo() < (int)arreglo[j].getTiempo())
+    public float[] ordenarTopTiempos(float[] arreglo){
+      float auxiliar;
+      float[] arregloOrdenado;
+      for(int i = 2; i < arreglo.length; i++)
+      {
+        for(int j = 0;j < arreglo.length-i;j++)
+        {
+          if(arreglo[j] > arreglo[j+1])
           {
-            auxiliar = arreglo[j+1];
-            arreglo[j+1] = arreglo[j];
-            arreglo[j] = auxiliar;
+            auxiliar = arreglo[j];
+            arreglo[j] = arreglo[j+1];
+            arreglo[j+1] = auxiliar;
           }   
         }
       }
