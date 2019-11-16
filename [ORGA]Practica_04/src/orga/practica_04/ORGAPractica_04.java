@@ -28,6 +28,8 @@ public class ORGAPractica_04 {
             i = (int) (Math.random() * 5) + 1;
         }
         
+        /*PantallaJuego n = new PantallaJuego();
+        n.setVisible(true);*/
     }
     
 }
