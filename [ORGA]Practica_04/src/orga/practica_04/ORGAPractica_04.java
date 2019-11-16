@@ -20,8 +20,8 @@ public class ORGAPractica_04 {
         // TODO code application logic here
         
         //Instancia de la ventana principal del juego:
-        //LogIn loginInicio = new LogIn();
-        //loginInicio.setVisible(true);
+        LogIn loginInicio = new LogIn();
+        loginInicio.setVisible(true);
         int i = (int) (Math.random() * 5) + 1;
         for (int j = 0; j < 10; j++) {
             System.out.println("numero: " + i);
