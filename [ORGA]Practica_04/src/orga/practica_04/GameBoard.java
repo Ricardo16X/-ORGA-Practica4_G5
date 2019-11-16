@@ -6,18 +6,15 @@
 package orga.practica_04;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import static java.lang.Thread.sleep;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import pruebas.Hilo_Snake;
 
 /**
@@ -25,38 +22,38 @@ import pruebas.Hilo_Snake;
  * @author aiyel
  */
 public class GameBoard extends javax.swing.JFrame {
-
     JLabel[][] matriz = new JLabel[12][12];
-    JLabel matriz1 = new JLabel();
     ArrayList<JLabel> Snake1 = new ArrayList<>();
-    JLabel[] ZZZ = new JLabel[144]; 
-    Hilo_Snake HP;
+    Hilo_Snake1 HP;
     Color snake = Color.green;
     Color obstaculos = Color.blue;
     int nivel = 1;
     int puntaje = 0;
     int contador = 1;
-    int enX = (int) (Math.random()*12);
-    int enY = (int) (Math.random()*12);
-    boolean contador1 = true;
-    JButton botonsito = new JButton();
+    int enX_m = 0;
+    int enY_m = 0;
+
     /**
      * Creates new form GameBoard
      */
     public GameBoard() {
         initComponents();
-        matriz1.setBounds(5, 5+37*5, 35, 35);
-        matriz1.setOpaque(true);
-        matriz1.setBackground(snake);
-        this.add(matriz1);
-        animacion(Snake1);
-        HP = new Hilo_Snake(matriz1,1,Snake1,snake);
+        for (int i = 7; i < 10; i++) {
+            JLabel jlabel = new JLabel();
+            jlabel.setOpaque(true);
+            jlabel.setBackground(snake);
+            jlabel.setVisible(true);
+            jlabel.setBounds(5 + 37 * i, 5 + 37 * 5, 35, 35);
+            Snake1.add(jlabel);
+            this.add(jlabel);
+        }
+        HP = new Hilo_Snake1(4, Snake1, snake);
         HP.start();
-        System.out.println("el tamano es: " + Snake1.size());
         MostrarMatriz();
         personaje();
-        
-        this.addKeyListener( new KeyListener(){
+        bocado();
+
+        this.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -68,34 +65,32 @@ public class GameBoard extends javax.swing.JFrame {
                     System.out.println("Adelante");
                     HP.setMovimiento(1);
                 }
-                if(e.getKeyCode() == KeyEvent.VK_DOWN){
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     System.out.println("Abajo");
                     HP.setMovimiento(2);
                 }
-                if(e.getKeyCode() == KeyEvent.VK_UP){
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
                     System.out.println("Arriba");
                     HP.setMovimiento(3);
                 }
-                if(e.getKeyCode() == KeyEvent.VK_LEFT){
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     System.out.println("Izquierda");
                     HP.setMovimiento(4);
                 }
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     System.out.println("Comi algo");
-                    HP.setComida(5);
-                    animacion(HP.getSnake());
-                    //MostrarMatriz();
-                    //personaje();
+                    MostrarMatriz();
+                    personaje();
                 }
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                
+
             }
-            
+
         });
-        
+
         //bocado();
         this.setLocationRelativeTo(null);
     }
@@ -156,13 +151,18 @@ public class GameBoard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception e) {
+                }
                 new GameBoard().setVisible(true);
             }
         });
     }
 
     private void MostrarMatriz() {
-        int tamanio=35, posx=5, posy=5;
+        
+        int tamanio = 35, posx = 5, posy = 5;
         Color c = Color.white;
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
@@ -180,10 +180,8 @@ public class GameBoard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
     private void personaje() {
         obstaculos();
-        //animacion();
     }
 
     private void obstaculos() {
@@ -200,14 +198,14 @@ public class GameBoard extends javax.swing.JFrame {
             default:
                 break;
         }
-        
+
     }
-    
-    private void limpiar(){
+
+    private void limpiar() {
         Color c = Color.white;
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
-                if(matriz[i][j].getBackground() == obstaculos){
+                if (matriz[i][j].getBackground() != obstaculos) {
                     matriz[i][j].setBackground(c);
                 }
             }
@@ -223,7 +221,7 @@ public class GameBoard extends javax.swing.JFrame {
         matriz[1][0].setBackground(obstaculos);
         matriz[2][0].setBackground(obstaculos);
         matriz[3][0].setBackground(obstaculos);
-        
+
         matriz[11][0].setBackground(obstaculos);
         matriz[10][0].setBackground(obstaculos);
         matriz[9][0].setBackground(obstaculos);
@@ -231,7 +229,7 @@ public class GameBoard extends javax.swing.JFrame {
         matriz[11][1].setBackground(obstaculos);
         matriz[11][2].setBackground(obstaculos);
         matriz[11][3].setBackground(obstaculos);
-        
+
         matriz[11][11].setBackground(obstaculos);
         matriz[11][10].setBackground(obstaculos);
         matriz[11][9].setBackground(obstaculos);
@@ -239,7 +237,7 @@ public class GameBoard extends javax.swing.JFrame {
         matriz[10][11].setBackground(obstaculos);
         matriz[9][11].setBackground(obstaculos);
         matriz[8][11].setBackground(obstaculos);
-        
+
         matriz[0][11].setBackground(obstaculos);
         matriz[1][11].setBackground(obstaculos);
         matriz[2][11].setBackground(obstaculos);
@@ -255,27 +253,27 @@ public class GameBoard extends javax.swing.JFrame {
         matriz[0][1].setBackground(obstaculos);
         matriz[0][2].setBackground(obstaculos);
         matriz[0][3].setBackground(obstaculos);
-        
+
         matriz[11][1].setBackground(obstaculos);
         matriz[11][2].setBackground(obstaculos);
         matriz[11][3].setBackground(obstaculos);
         matriz[11][0].setBackground(obstaculos);
-        
+
         matriz[11][11].setBackground(obstaculos);
         matriz[11][10].setBackground(obstaculos);
         matriz[11][9].setBackground(obstaculos);
         matriz[11][8].setBackground(obstaculos);
-        
+
         matriz[0][11].setBackground(obstaculos);
         matriz[0][10].setBackground(obstaculos);
         matriz[0][9].setBackground(obstaculos);
         matriz[0][8].setBackground(obstaculos);
-        
+
         matriz[4][2].setBackground(obstaculos);
         matriz[5][2].setBackground(obstaculos);
         matriz[6][2].setBackground(obstaculos);
         matriz[7][2].setBackground(obstaculos);
-        
+
         matriz[4][9].setBackground(obstaculos);
         matriz[5][9].setBackground(obstaculos);
         matriz[6][9].setBackground(obstaculos);
@@ -291,7 +289,7 @@ public class GameBoard extends javax.swing.JFrame {
         matriz[1][0].setBackground(obstaculos);
         matriz[2][0].setBackground(obstaculos);
         matriz[3][0].setBackground(obstaculos);
-        
+
         matriz[11][0].setBackground(obstaculos);
         matriz[10][0].setBackground(obstaculos);
         matriz[9][0].setBackground(obstaculos);
@@ -299,7 +297,7 @@ public class GameBoard extends javax.swing.JFrame {
         matriz[11][1].setBackground(obstaculos);
         matriz[11][2].setBackground(obstaculos);
         matriz[11][3].setBackground(obstaculos);
-        
+
         matriz[11][11].setBackground(obstaculos);
         matriz[11][10].setBackground(obstaculos);
         matriz[11][9].setBackground(obstaculos);
@@ -307,7 +305,7 @@ public class GameBoard extends javax.swing.JFrame {
         matriz[10][11].setBackground(obstaculos);
         matriz[9][11].setBackground(obstaculos);
         matriz[8][11].setBackground(obstaculos);
-        
+
         matriz[0][11].setBackground(obstaculos);
         matriz[1][11].setBackground(obstaculos);
         matriz[2][11].setBackground(obstaculos);
@@ -315,9 +313,9 @@ public class GameBoard extends javax.swing.JFrame {
         matriz[0][10].setBackground(obstaculos);
         matriz[0][9].setBackground(obstaculos);
         matriz[0][8].setBackground(obstaculos);
-        
+
         for (int i = 3; i < 9; i++) {
-            if(i!=5){
+            if (i != 5) {
                 matriz[3][i].setBackground(obstaculos);
                 matriz[8][i].setBackground(obstaculos);
             }
@@ -325,17 +323,152 @@ public class GameBoard extends javax.swing.JFrame {
     }
 
     private void bocado() {
-        if(matriz[enX][enY].getBackground() == obstaculos){
-            enX = (int) (Math.random()*12);
-            enY = (int) (Math.random()*12);
-            bocado();
-        }else{
-            matriz[enX][enY].setBackground(Color.orange);
+        enX_m = (int)(Math.random()*12);
+        enY_m = (int)(Math.random()*12);
+        while(matriz[enX_m][enY_m].getBackground() == obstaculos){
+            enX_m = (int)(Math.random()*12);
+            enY_m = (int)(Math.random()*12);
         }
-    }
-
-    private void animacion(ArrayList<JLabel> _snake1) {
-        
+        matriz[enX_m][enY_m].setBackground(Color.ORANGE);
+        matriz[enX_m][enY_m].updateUI();
     }
     
+    
+    
+    /*Clase Interna Funcionando Correctamente*/
+    public class Hilo_Snake1 extends Thread {
+
+        int posX = 5 + 37 * 6;    // Posición X Inicial
+        int posY = 5 + 37 * 5;     // Posición Y Inicial
+        public int movimiento;
+        public Color c;
+        public JPanel jPanel;
+        public JFrame prueba;
+
+        public Hilo_Snake1(int _movimiento, ArrayList _snake, Color sa) {
+            this.movimiento = _movimiento;
+            this.c = sa;
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    Thread.sleep(500);
+                    if (getMovimiento() == 1) {//DERECHA
+                        if (posX >= 5 + 37 * 11) {
+                            posX = 5;
+                        } else {
+                            posX = posX + 37;
+                            // Juego de Variables
+                            int ActualX = posX;
+                            int ActualY = posY;
+                            int TempX = 0;
+                            int TempY = 0;
+                            /*Al momento de jugar con las posiciones*/
+ /*A la cabeza del snake, será su posición Actual
+                        Mientras que la temporal, será la nueva posición dentro de si
+                             */
+                            for (int i = 0; i < Snake1.size(); i++) {
+                                TempX = Snake1.get(i).getLocation().x;
+                                TempY = Snake1.get(i).getLocation().y;
+                                Snake1.get(i).setLocation(ActualX, ActualY);
+                                ActualX = TempX;
+                                ActualY = TempY;
+                            }
+                        }
+                    }
+                    if (getMovimiento() == 2) {//ABAJO
+                        if (posY >= 5 + 37 * 11) {
+                            posY = 5 - 37;
+                        } else {
+                            posY = posY + 37;
+                            // Juego de Variables
+                            int ActualY = posY;
+                            int ActualX = posX;
+                            int TempX = 0;
+                            int TempY = 0;
+
+                            /*Al momento de jugar con las posiciones*/
+ /*A la cabeza del snake, será su posición Actual
+                        Mientras que la temporal, será la nueva posición dentro de si
+                             */
+                            for (int i = 0; i < Snake1.size(); i++) {
+                                TempX = Snake1.get(i).getLocation().x;
+                                TempY = Snake1.get(i).getLocation().y;
+                                Snake1.get(i).setLocation(ActualX, ActualY);
+                                ActualX = TempX;
+                                ActualY = TempY;
+                            }
+                        }
+                    }
+                    if (getMovimiento() == 3) {//ARRIBA
+                        if (posY <= 5) {
+                            posY = 5 + 37 * 11;
+                        } else {
+                            posY = posY - 37;
+                            // Juego de Variables
+                            int ActualX = posX;
+                            int ActualY = posY;
+                            int TempX = 0;
+                            int TempY = 0;
+                            /*Al momento de jugar con las posiciones*/
+ /*A la cabeza del snake, será su posición Actual
+                        Mientras que la temporal, será la nueva posición dentro de si
+                             */
+                            for (int i = 0; i < Snake1.size(); i++) {
+                                TempX = Snake1.get(i).getLocation().x;
+                                TempY = Snake1.get(i).getLocation().y;
+                                Snake1.get(i).setLocation(ActualX, ActualY);
+                                ActualX = TempX;
+                                ActualY = TempY;
+                            }
+                        }
+                    }
+                    if (getMovimiento() == 4) {//IZQUIERDA
+                        if (posX <= 5) {
+                            posX = 5 + 37 * 12;
+                        } else {
+                            posX = posX - 37;
+                            // Juego de Variables
+                            int ActualX = posX;
+                            int ActualY = posY;
+                            int TempX = 0;
+                            int TempY = 0;
+                            /*Al momento de jugar con las posiciones*/
+ /*A la cabeza del snake, será su posición Actual
+                        Mientras que la temporal, será la nueva posición dentro de si
+                             */
+                            for (int i = 0; i < Snake1.size(); i++) {
+                                TempX = Snake1.get(i).getLocation().x;
+                                TempY = Snake1.get(i).getLocation().y;
+                                Snake1.get(i).setLocation(ActualX, ActualY);
+                                ActualX = TempX;
+                                ActualY = TempY;
+                            }
+                        }
+                    }
+                    if (matriz[enX_m][enY_m].getLocation().x == Snake1.get(0).getLocation().x && matriz[enX_m][enY_m].getLocation().y == Snake1.get(0).getLocation().y) {
+                        System.out.println("Colisión Comida - Cabeza");
+                        JLabel aux1 = new JLabel();
+                        aux1.setBounds(posX, posY, 35, 35);
+                        aux1.setOpaque(true);
+                        aux1.setBackground(c);  // Color de Snake1 = Verde Lima
+                        Snake1.add(aux1);
+                        bocado();
+                    }
+                } catch (InterruptedException e) {
+                    System.out.println("Error:" + e);
+                }
+            }
+        }
+
+        public int getMovimiento() {
+            return movimiento;
+        }
+
+        public void setMovimiento(int movimiento) {
+            this.movimiento = movimiento;
+        }
+    }
 }
