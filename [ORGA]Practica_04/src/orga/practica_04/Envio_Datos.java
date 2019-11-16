@@ -1,4 +1,4 @@
-package juego;
+package orga.practica_04;
 
 public class Envio_Datos implements Runnable{
 	int CoordenadaX, CoordenadaY;

@@ -1,4 +1,5 @@
-package juego;
+//package juego;
+package orga.practica_04;
 
 import java.awt.EventQueue;
 import java.awt.event.KeyAdapter;
@@ -14,12 +15,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
-import juego.PantallaJuego.Coordenadas;
+import orga.practica_04.PantallaJuego.Coordenadas;
 
 public class PantallaJuego extends JFrame implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	// Variables de Inicialización
+	// Variables de Inicializaciï¿½n
 	JLabel[][] tablero;
 	ArrayList<Coordenadas> cuerpo;
 	JPanel panel;
@@ -28,7 +29,7 @@ public class PantallaJuego extends JFrame implements Runnable {
 	int snake_tamanio = 1;
 	int direccion = 1;
 	int PX, PY;
-	// Variable Thread para el envío de datos
+	// Variable Thread para el envï¿½o de datos
 	Envio_Datos envioParalelo;
 	Coordenadas coorCuerpo;
 
@@ -58,7 +59,7 @@ public class PantallaJuego extends JFrame implements Runnable {
 	 */
 	public PantallaJuego() {
 		/*
-		 * Creando las variables para el uso del hilo y el envío de datos.
+		 * Creando las variables para el uso del hilo y el envï¿½o de datos.
 		 */
 		envioParalelo = new Envio_Datos(X, Y);
 		coorCuerpo = new Coordenadas(0, 0);
@@ -172,7 +173,7 @@ public class PantallaJuego extends JFrame implements Runnable {
 			ActualX = TempX;
 			ActualY = TempY;
 		}
-		// Detectando Colisión
+		// Detectando Colisiï¿½n
 		if (PX == cuerpo.get(0).ActualX && PY == cuerpo.get(0).ActualY) {
 			switch (direccion) {
 			case 1: // Izquierda
