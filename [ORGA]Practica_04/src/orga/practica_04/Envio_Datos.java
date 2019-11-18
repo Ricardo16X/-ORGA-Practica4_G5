@@ -1,11 +1,10 @@
 package orga.practica_04;
 
 public class Envio_Datos implements Runnable{
-	int CoordenadaX, CoordenadaY;
-	public Envio_Datos(int X, int Y) {
+	JLabel[][] tablero;
+	public Envio_Datos(int X, JLabel[][] tablero) {
 		// TODO Auto-generated constructor stub
-		CoordenadaX = X;
-		CoordenadaY = Y;
+		this.tablero = tablero;
 	}
 	
 	@Override
@@ -13,20 +12,21 @@ public class Envio_Datos implements Runnable{
 		// TODO Auto-generated method stub
 		try {
 			while(true) {
-				System.out.println("Enviando X = " + CoordenadaX);
-				System.out.println("Enviando Y = " + CoordenadaY);
-				Thread.sleep(1);
+				for (int i = 0; i < tablero.length; i++) {
+					//System.out.println("Enviando Columna " + (i + 1));
+					for (int j = 11; j >= 0; j--) {
+						//System.out.println("Enviando Fila " + (j + 1));
+						if (tablero[i][j].getBackground() != Color.RED) {
+							//System.out.println(1);
+						}else {
+							//System.out.println(0);
+						}
+					}
+				}
+				Thread.sleep(100);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-	}
-	
-	public void setX(int X) {
-		CoordenadaX = X;
-	}
-	
-	public void setY(int Y) {
-		CoordenadaY = Y;
 	}
 }
