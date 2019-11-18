@@ -1,3 +1,4 @@
+package orga.practica_04;
 import java.awt.EventQueue;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -12,6 +13,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JButton;
 
 public class PantallaJuego extends JFrame implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +26,8 @@ public class PantallaJuego extends JFrame implements Runnable {
 	JPanel panel;
 	JLabel lblPausa;
 	JLabel lblPunteo;
+        JButton btnRegresar;
+        
 	ArrayList<String> Obstaculos;
 	// Variables de Movimiento
 	int X = 6, Y = 5;
@@ -29,6 +35,8 @@ public class PantallaJuego extends JFrame implements Runnable {
 	int direccion = 1;
 	int pausa = 0;
 	int PX, PY;
+	int punteo = 0;
+	boolean cambioPunteo = false;
 	// Variable Thread para el env�o de datos
 	Envio_Datos envioParalelo;
 	Coordenadas coorCuerpo;
@@ -105,6 +113,8 @@ public class PantallaJuego extends JFrame implements Runnable {
 		lblPausa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPausa.setBounds(380, 349, 144, 21);
 		contentPane.add(lblPausa);
+                
+                
 
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero.length; j++) {
@@ -166,6 +176,10 @@ public class PantallaJuego extends JFrame implements Runnable {
 	}
 
 	public void pintarSerpiente(int direccion) {
+		if (direccion != 0) {
+			limpiar();
+			azules();
+			
 			switch (direccion) {
 			case 1: // Izquierda
 				if (X == 0) {
@@ -445,7 +459,12 @@ public class PantallaJuego extends JFrame implements Runnable {
 						direccion = pausa;
 						lblPausa.setVisible(false);
 					}
-				}
+				} else if(e.getKeyCode() == KeyEvent.VK_R){
+                                    PlayerForm O = new PlayerForm();
+                                    
+                                    O.setVisible(true);
+                                    dispose();
+                                }
 			}
 		});
 	}
