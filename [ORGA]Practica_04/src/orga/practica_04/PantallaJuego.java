@@ -1,4 +1,3 @@
-package orga.practica_04;
 import java.awt.EventQueue;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -13,8 +12,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
-import javax.swing.SwingConstants;
-import java.awt.Font;
 
 public class PantallaJuego extends JFrame implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -32,8 +29,6 @@ public class PantallaJuego extends JFrame implements Runnable {
 	int direccion = 1;
 	int pausa = 0;
 	int PX, PY;
-	int punteo = 0;
-	boolean cambioPunteo = false;
 	// Variable Thread para el env�o de datos
 	Envio_Datos envioParalelo;
 	Coordenadas coorCuerpo;
@@ -171,10 +166,6 @@ public class PantallaJuego extends JFrame implements Runnable {
 	}
 
 	public void pintarSerpiente(int direccion) {
-		if (direccion != 0) {
-			limpiar();
-			azules();
-			
 			switch (direccion) {
 			case 1: // Izquierda
 				if (X == 0) {

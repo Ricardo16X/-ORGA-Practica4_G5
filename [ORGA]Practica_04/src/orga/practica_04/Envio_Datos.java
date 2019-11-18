@@ -1,9 +1,5 @@
 package orga.practica_04;
 
-import java.awt.Color;
-
-import javax.swing.JLabel;
-
 public class Envio_Datos implements Runnable{
 	JLabel[][] tablero;
 	public Envio_Datos(int X, JLabel[][] tablero) {

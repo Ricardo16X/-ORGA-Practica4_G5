@@ -22,6 +22,8 @@ public class ORGAPractica_04 {
         //Instancia de la ventana principal del juego:
         LogIn loginInicio = new LogIn();
         loginInicio.setVisible(true);
+        //PantallaJuego a = new PantallaJuego();
+        //a.setVisible(true);
         int i = (int) (Math.random() * 5) + 1;
         for (int j = 0; j < 10; j++) {
             System.out.println("numero: " + i);
