@@ -461,7 +461,19 @@ public class PantallaJuego extends JFrame implements Runnable {
 					}
 				} else if(e.getKeyCode() == KeyEvent.VK_R){
                                     PlayerForm O = new PlayerForm();
+                                    LogIn.loggedPlayer.setNivel(nivel);
+                                    String s = String.valueOf(tiempo);
+                                    //LogIn.loggedPlayer.setTiempo(Float.parseFloat(s));
+                                    LogIn.loggedPlayer.setPuntos(punteo);
                                     
+                                    if (direccion != 0) {
+						pausa = direccion;
+						direccion = 0;
+						lblPausa.setVisible(true);
+					} else {
+						direccion = pausa;
+						lblPausa.setVisible(false);
+					}
                                     O.setVisible(true);
                                     dispose();
                                 }
