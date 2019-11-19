@@ -11,7 +11,7 @@ package orga.practica_04;
  */
 public class Jugador extends Usuario {
     
-    private float tiempo;
+    private double tiempo;
     private int puntos;
     private int nivel;
     private boolean estado; /*(estado) Este atributo indica si se ha aceptado la solicitud 
@@ -25,11 +25,11 @@ public class Jugador extends Usuario {
         this.estado = false;
     }
 
-    public float getTiempo() {
+    public double getTiempo() {
         return tiempo;
     }
 
-    public void setTiempo(float tiempo) {
+    public void setTiempo(double tiempo) {
         this.tiempo = tiempo;
     }
 

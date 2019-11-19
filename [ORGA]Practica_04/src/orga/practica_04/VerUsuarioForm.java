@@ -169,7 +169,7 @@ public class VerUsuarioForm extends javax.swing.JFrame {
             String user = jList1.getSelectedValue();
             String username;
             int puntaje;
-            float tiempo;
+            double tiempo;
             
             for(Jugador j: LogIn.admin.getListaJugadores()){
                 if(user.equals(j.getUsername())){

@@ -15,6 +15,8 @@ public class LogIn extends javax.swing.JFrame {
 
     
     public static Administrador admin = new Administrador("Admin_ORGA","12345");
+    private Jugador p = new Jugador("carlso","ff");
+    
     public static Jugador loggedPlayer;
     /**
      * Creates new form LogIn

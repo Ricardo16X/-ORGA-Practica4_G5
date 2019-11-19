@@ -462,7 +462,10 @@ public class PantallaJuego extends JFrame implements Runnable {
 				} else if(e.getKeyCode() == KeyEvent.VK_R){
                                     PlayerForm O = new PlayerForm();
                                     LogIn.loggedPlayer.setNivel(nivel);
-                                    String s = String.valueOf(tiempo);
+                                    String tt = String.valueOf(tiempo.M+"."+tiempo.S);
+                                    double t = Double.parseDouble(tt);
+                                    LogIn.loggedPlayer.setTiempo(t);
+                                    
                                     //LogIn.loggedPlayer.setTiempo(Float.parseFloat(s));
                                     LogIn.loggedPlayer.setPuntos(punteo);
                                     
