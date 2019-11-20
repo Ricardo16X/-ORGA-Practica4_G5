@@ -5,6 +5,8 @@
  */
 package orga.practica_04;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aiyel
@@ -94,6 +96,11 @@ public class PlayerForm extends javax.swing.JFrame {
         jLabel4.setText("Usuario");
 
         tf_time.setEditable(false);
+        tf_time.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_timeActionPerformed(evt);
+            }
+        });
 
         tf_score.setEditable(false);
 
@@ -187,6 +194,7 @@ public class PlayerForm extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null,"VIBORITA 3.0\n Universidad de San Carlos de Guatemala \n" );
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -213,6 +221,10 @@ public class PlayerForm extends javax.swing.JFrame {
             login.setVisible(true);
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void tf_timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_timeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_timeActionPerformed
 
     /**
      * @param args the command line arguments
