@@ -16,6 +16,8 @@ import javax.swing.border.LineBorder;
 
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class PantallaJuego extends JFrame implements Runnable {
@@ -39,6 +41,8 @@ public class PantallaJuego extends JFrame implements Runnable {
     int PX, PY;
     int punteo = 0;
     boolean cambioPunteo = false;
+    int ActualX = 0, ActualY = 0;
+    int TempX = 0, TempY = 0;
     // Variable Thread para el env�o de datos
     Envio_Datos envioParalelo;
     Coordenadas coorCuerpo;
@@ -49,9 +53,16 @@ public class PantallaJuego extends JFrame implements Runnable {
     Thread juego;
     Thread hiloTiempo;
 
-    /**
-     * Launch the application.
-     */
+    final Image img_cabeza = new ImageIcon("src/imagenes/cabeza_snake.png").getImage();
+    final ImageIcon cabeza = new ImageIcon(img_cabeza.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+    final Image img_cuerpo = new ImageIcon("src/imagenes/cuerpo_snake.png").getImage();
+    final ImageIcon cuerpoSnake = new ImageIcon(img_cuerpo.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+    final Image img_comida = new ImageIcon("src/imagenes/comida.png").getImage();
+    final ImageIcon comidaSnake = new ImageIcon(img_comida.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+    ImageIcon lava = new ImageIcon("src/imagenes/lava.gif");
+    final Image img_superficie = new ImageIcon("src/imagenes/superficie.png").getImage();
+    final ImageIcon superficie = new ImageIcon(img_superficie.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+    
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -66,9 +77,6 @@ public class PantallaJuego extends JFrame implements Runnable {
         });
     }
 
-    /**
-     * Create the frame.
-     */
     public PantallaJuego() {
         /*
 		 * Creando las variables para el uso del hilo y el env�o de datos.
@@ -80,7 +88,7 @@ public class PantallaJuego extends JFrame implements Runnable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 550, 419);
         contentPane = new JPanel();
-        contentPane.setBackground(new Color(153, 153, 204));
+        contentPane.setBackground(Color.DARK_GRAY);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setLocationRelativeTo(null);
         setContentPane(contentPane);
@@ -97,16 +105,20 @@ public class PantallaJuego extends JFrame implements Runnable {
 
         JLabel lblTiempo = new JLabel("Tiempo: 0:0");
         lblTiempo.setBounds(380, 93, 144, 14);
+        lblTiempo.setForeground(Color.WHITE);
         contentPane.add(lblTiempo);
+        
         tiempo = new Tiempo(lblTiempo);
         hiloTiempo = new Thread(tiempo);
 
         JLabel lblJugador = new JLabel("Jugador:");
         lblJugador.setBounds(380, 10, 144, 14);
+        lblJugador.setForeground(Color.WHITE);
         contentPane.add(lblJugador);
 
         lblPunteo = new JLabel("Punteo: 0");
         lblPunteo.setBounds(380, 174, 144, 14);
+        lblPunteo.setForeground(Color.WHITE);
         contentPane.add(lblPunteo);
 
         lblPausa = new JLabel("PAUSA");
@@ -114,6 +126,7 @@ public class PantallaJuego extends JFrame implements Runnable {
         lblPausa.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         lblPausa.setHorizontalAlignment(SwingConstants.CENTER);
         lblPausa.setBounds(380, 349, 144, 21);
+        lblPausa.setForeground(Color.WHITE);
         contentPane.add(lblPausa);
 
         for (int i = 0; i < tablero.length; i++) {
@@ -146,9 +159,9 @@ public class PantallaJuego extends JFrame implements Runnable {
         movSnake.start();
         enviarDatos.start();
         hiloTiempo.start();
-        pintarSerpiente(1);
-        pintarComida();
         nivel1();
+        pintarComida();
+        pintarSerpiente(1);
     }
 
     private void azules() {
@@ -167,12 +180,12 @@ public class PantallaJuego extends JFrame implements Runnable {
     public void pintarComida() {
         PX = (int) (Math.random() * 10) + 1;
         PY = (int) (Math.random() * 10) + 1;
-        while (tablero[PX][PY].getBackground() == Color.BLACK || tablero[PX][PY].getBackground() == Color.BLUE || tablero[PX][PY].getBackground() == Color.GREEN ) {
+        while (tablero[PX][PY].getBackground() == Color.BLACK || tablero[PX][PY].getBackground() == Color.BLUE) {
             PX = (int) (Math.random() * 10) + 1;
             PY = (int) (Math.random() * 10) + 1;
         }
         tablero[PX][PY].setBackground(Color.ORANGE);
-        tablero[PX][PY].updateUI();
+        tablero[PX][PY].setIcon(comidaSnake);
     }
 
     public void pintarSerpiente(int direccion) {
@@ -209,15 +222,15 @@ public class PantallaJuego extends JFrame implements Runnable {
                     break;
             }
 
-            int ActualX = X, ActualY = Y;
-            int TempX, TempY;
+            ActualX = X;
+            ActualY = Y;
 
             for (int i = 0; i < cuerpo.size(); i++) {
+                tablero[ActualX][ActualY].setBackground(Color.BLACK);
                 if (i == 0) {
-                    tablero[ActualX][ActualY].setBackground(Color.GREEN);
-                    
+                    tablero[ActualX][ActualY].setIcon(cabeza);
                 } else {
-                    tablero[ActualX][ActualY].setBackground(Color.BLACK);
+                    tablero[ActualX][ActualY].setIcon(cuerpoSnake);
                 }
                 TempX = cuerpo.get(i).ActualX;
                 TempY = cuerpo.get(i).ActualY;
@@ -227,20 +240,6 @@ public class PantallaJuego extends JFrame implements Runnable {
                 ActualY = TempY;
             }
 
-            /*
-			 * Detectando colisiones con las paredes
-             */
- /*for (int i = 0; i < tablero.length; i++) {
-				for (int j = 0; j < tablero.length; j++) {
-					if (tablero[i][j].getBackground() == Color.BLUE) {
-						if (cuerpo.get(0).ActualX == j && cuerpo.get(0).ActualY == i) {
-							limpiar();
-							direccion = 0;
-							JOptionPane.showMessageDialog(null, "GAME OVER");
-						}
-					}
-				}
-			}*/
             if (Obstaculos.size() > 0) {
                 String primero_serpiente = cuerpo.get(0).ActualX + "," + cuerpo.get(0).ActualY;
                 boolean colision1 = Obstaculos.contains(primero_serpiente);
@@ -352,23 +351,13 @@ public class PantallaJuego extends JFrame implements Runnable {
 
     private void limpiar() {
         // TODO Auto-generated method stub
-        for (int i = 0; i < tablero.length; i++) {
+        for (JLabel[] tablero1 : tablero) {
             for (int j = 0; j < tablero.length; j++) {
-                if (tablero[i][j].getBackground() != Color.ORANGE) {
-                    tablero[i][j].setBackground(Color.WHITE);
+                if (tablero1[j].getBackground() != Color.ORANGE && tablero1[j].getBackground() != Color.BLUE) {
+                    tablero1[j].setBackground(Color.WHITE);
+                    tablero1[j].setIcon(superficie);
                 }
             }
-        }
-        switch (nivel) {
-            case 1:
-                nivel1();
-                break;
-            case 2:
-                nivel2();
-                break;
-            case 3:
-                nivel3();
-                break;
         }
     }
 
@@ -404,6 +393,38 @@ public class PantallaJuego extends JFrame implements Runnable {
         tablero[11][9].setBackground(Color.BLUE);
         tablero[11][10].setBackground(Color.BLUE);
         tablero[11][11].setBackground(Color.BLUE);
+        // Establecer Imagen de Lava
+        tablero[0][0].setIcon(lava);
+        tablero[0][1].setIcon(lava);
+        tablero[0][2].setIcon(lava);
+        tablero[0][3].setIcon(lava);
+        tablero[1][0].setIcon(lava);
+        tablero[2][0].setIcon(lava);
+        tablero[3][0].setIcon(lava);
+
+        tablero[0][11].setIcon(lava);
+        tablero[0][10].setIcon(lava);
+        tablero[0][9].setIcon(lava);
+        tablero[0][8].setIcon(lava);
+        tablero[1][11].setIcon(lava);
+        tablero[2][11].setIcon(lava);
+        tablero[3][11].setIcon(lava);
+
+        tablero[8][0].setIcon(lava);
+        tablero[9][0].setIcon(lava);
+        tablero[10][0].setIcon(lava);
+        tablero[11][0].setIcon(lava);
+        tablero[11][1].setIcon(lava);
+        tablero[11][2].setIcon(lava);
+        tablero[11][3].setIcon(lava);
+
+        tablero[8][11].setIcon(lava);
+        tablero[9][11].setIcon(lava);
+        tablero[10][11].setIcon(lava);
+        tablero[11][8].setIcon(lava);
+        tablero[11][9].setIcon(lava);
+        tablero[11][10].setIcon(lava);
+        tablero[11][11].setIcon(lava);
     }
 
     private void nivel2() {
@@ -436,6 +457,37 @@ public class PantallaJuego extends JFrame implements Runnable {
         tablero[5][9].setBackground(Color.BLUE);
         tablero[6][9].setBackground(Color.BLUE);
         tablero[7][9].setBackground(Color.BLUE);
+        
+        /* Imagenes de Lava*/
+        tablero[0][0].setIcon(lava);
+        tablero[0][1].setIcon(lava);
+        tablero[0][2].setIcon(lava);
+        tablero[0][3].setIcon(lava);
+
+        tablero[11][1].setIcon(lava);
+        tablero[11][2].setIcon(lava);
+        tablero[11][3].setIcon(lava);
+        tablero[11][0].setIcon(lava);
+
+        tablero[11][11].setIcon(lava);
+        tablero[11][10].setIcon(lava);
+        tablero[11][9].setIcon(lava);
+        tablero[11][8].setIcon(lava);
+
+        tablero[0][11].setIcon(lava);
+        tablero[0][10].setIcon(lava);
+        tablero[0][9].setIcon(lava);
+        tablero[0][8].setIcon(lava);
+
+        tablero[4][2].setIcon(lava);
+        tablero[5][2].setIcon(lava);
+        tablero[6][2].setIcon(lava);
+        tablero[7][2].setIcon(lava);
+
+        tablero[4][9].setIcon(lava);
+        tablero[5][9].setIcon(lava);
+        tablero[6][9].setIcon(lava);
+        tablero[7][9].setIcon(lava);
     }
 
     private void nivel3() {
@@ -477,6 +529,47 @@ public class PantallaJuego extends JFrame implements Runnable {
                 tablero[8][i].setBackground(Color.BLUE);
             }
         }
+        
+        /* Pintura de Lava */
+        tablero[0][0].setIcon(lava);
+        tablero[0][1].setIcon(lava);
+        tablero[0][2].setIcon(lava);
+        tablero[0][3].setIcon(lava);
+        tablero[1][0].setIcon(lava);
+        tablero[2][0].setIcon(lava);
+        tablero[3][0].setIcon(lava);
+
+        tablero[11][0].setIcon(lava);
+        tablero[10][0].setIcon(lava);
+        tablero[9][0].setIcon(lava);
+        tablero[8][0].setIcon(lava);
+        tablero[11][1].setIcon(lava);
+        tablero[11][2].setIcon(lava);
+        tablero[11][3].setIcon(lava);
+
+        tablero[11][11].setIcon(lava);
+        tablero[11][10].setIcon(lava);
+        tablero[11][9].setIcon(lava);
+        tablero[11][8].setIcon(lava);
+        tablero[10][11].setIcon(lava);
+        tablero[9][11].setIcon(lava);
+        tablero[8][11].setIcon(lava);
+
+        tablero[0][11].setIcon(lava);
+        tablero[1][11].setIcon(lava);
+        tablero[2][11].setIcon(lava);
+        tablero[3][11].setIcon(lava);
+        tablero[0][10].setIcon(lava);
+        tablero[0][9].setIcon(lava);
+        tablero[0][8].setIcon(lava);
+
+        for (int i = 3; i < 9; i++) {
+            if (i != 5) {
+                tablero[3][i].setIcon(lava);
+                tablero[8][i].setIcon(lava);
+            }
+        }
+        
     }
 
     private void reiniciar() {
