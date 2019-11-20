@@ -191,7 +191,6 @@ public class PantallaJuego extends JFrame implements Runnable {
     public void pintarSerpiente(int direccion) {
         if (direccion != 0) {
             limpiar();
-            azules();
 
             switch (direccion) {
                 case 1: // Izquierda
@@ -393,6 +392,8 @@ public class PantallaJuego extends JFrame implements Runnable {
         tablero[11][9].setBackground(Color.BLUE);
         tablero[11][10].setBackground(Color.BLUE);
         tablero[11][11].setBackground(Color.BLUE);
+        
+        azules();
         // Establecer Imagen de Lava
         tablero[0][0].setIcon(lava);
         tablero[0][1].setIcon(lava);
@@ -458,6 +459,7 @@ public class PantallaJuego extends JFrame implements Runnable {
         tablero[6][9].setBackground(Color.BLUE);
         tablero[7][9].setBackground(Color.BLUE);
         
+        azules();
         /* Imagenes de Lava*/
         tablero[0][0].setIcon(lava);
         tablero[0][1].setIcon(lava);
@@ -530,6 +532,7 @@ public class PantallaJuego extends JFrame implements Runnable {
             }
         }
         
+        azules();
         /* Pintura de Lava */
         tablero[0][0].setIcon(lava);
         tablero[0][1].setIcon(lava);
