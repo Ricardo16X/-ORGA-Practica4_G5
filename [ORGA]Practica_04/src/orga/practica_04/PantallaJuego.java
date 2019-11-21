@@ -246,7 +246,12 @@ public class PantallaJuego extends JFrame implements Runnable {
                     JOptionPane.showMessageDialog(null, "GAME OVER");
                     PlayerForm O = new PlayerForm();
                     LogIn.loggedPlayer.setNivel(nivel);
-                    String tt = String.valueOf(tiempo.M + "." + tiempo.S);
+                    String tt = "";
+                    if(tiempo.S < 10){
+                        tt = String.valueOf(tiempo.M + ".0" + tiempo.S);
+                    }else{
+                        tt = String.valueOf(tiempo.M + "." + tiempo.S);
+                    }
                     double t = Double.parseDouble(tt);
                     LogIn.loggedPlayer.setTiempo(t);
                     //LogIn.loggedPlayer.setTiempo(Float.parseFloat(s));
@@ -300,7 +305,12 @@ public class PantallaJuego extends JFrame implements Runnable {
                         JOptionPane.showMessageDialog(null, "GAME OVER");
                         PlayerForm O = new PlayerForm();
                         LogIn.loggedPlayer.setNivel(nivel);
-                        String tt = String.valueOf(tiempo.M + "." + tiempo.S);
+                        String tt = "";
+                        if(tiempo.S < 10){
+                            tt = String.valueOf(tiempo.M + ".0" + tiempo.S);
+                        }else{
+                            tt = String.valueOf(tiempo.M + "." + tiempo.S);
+                        }
                         double t = Double.parseDouble(tt);
                         LogIn.loggedPlayer.setTiempo(t);
                         //LogIn.loggedPlayer.setTiempo(Float.parseFloat(s));
@@ -632,7 +642,12 @@ public class PantallaJuego extends JFrame implements Runnable {
                     case KeyEvent.VK_R:
                         PlayerForm O = new PlayerForm();
                         LogIn.loggedPlayer.setNivel(nivel);
-                        String tt = String.valueOf(tiempo.M + "." + tiempo.S);
+                        String tt = "";
+                        if(tiempo.S < 10){
+                            tt = String.valueOf(tiempo.M + ".0" + tiempo.S);
+                        }else{
+                            tt = String.valueOf(tiempo.M + "." + tiempo.S);
+                        }
                         double t = Double.parseDouble(tt);
                         LogIn.loggedPlayer.setTiempo(t);
                         //LogIn.loggedPlayer.setTiempo(Float.parseFloat(s));
@@ -706,7 +721,11 @@ public class PantallaJuego extends JFrame implements Runnable {
                                 M = 0;
                             }
                         }
-                        mostrarTiempo.setText("Tiempo: " + String.valueOf(S) + " : " + String.valueOf(M));
+                        if(S<10){
+                            mostrarTiempo.setText("Tiempo: " + String.valueOf(M) + " : 0" + String.valueOf(S));
+                        }else{
+                            mostrarTiempo.setText("Tiempo: " + String.valueOf(M) + " : " + String.valueOf(S));
+                        }
                     }
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
