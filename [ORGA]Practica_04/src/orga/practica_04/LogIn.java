@@ -56,16 +56,16 @@ public class LogIn extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setForeground(new java.awt.Color(51, 102, 255));
 
-        jLabel4.setFont(new java.awt.Font("Microsoft PhagsPa", 3, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 24)); // NOI18N
         jLabel4.setText("Log In");
 
-        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 13)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
         jLabel1.setText("Nombre de Usuario");
 
-        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 13)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
         jLabel2.setText("Contraseña");
 
-        jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
         jButton2.setText("Registrarse");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,11 +75,11 @@ public class LogIn extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/orga/practica_04/serpiente(2).png"))); // NOI18N
 
-        tf_username.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 12)); // NOI18N
+        tf_username.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
 
-        tf_password.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 12)); // NOI18N
+        tf_password.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
         jButton1.setText("Ingresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,17 +96,20 @@ public class LogIn extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jButton1)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addComponent(jButton2)
-                        .addGap(65, 65, 65))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(41, 41, 41))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tf_password, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jLabel3)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -188,8 +191,8 @@ public class LogIn extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"El usuario ingresado no existe o la contraseña es incorrecta!");
         
         }
-        
-        
+             
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
