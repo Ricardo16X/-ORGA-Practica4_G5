@@ -191,8 +191,8 @@ public class LogIn extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"El usuario ingresado no existe o la contraseña es incorrecta!");
         
         }
-        
-        
+             
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

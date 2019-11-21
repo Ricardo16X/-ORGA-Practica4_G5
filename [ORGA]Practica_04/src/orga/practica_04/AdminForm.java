@@ -22,7 +22,7 @@ public class AdminForm extends javax.swing.JFrame {
     public AdminForm() {
         initComponents();
         this.setLocationRelativeTo(null);
-    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,7 +155,7 @@ public class AdminForm extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,11 +208,12 @@ public class AdminForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+       PlayerForm.tiempos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+         PlayerForm.puntajes();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

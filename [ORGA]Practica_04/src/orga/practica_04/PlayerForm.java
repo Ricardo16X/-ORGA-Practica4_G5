@@ -275,9 +275,7 @@ public class PlayerForm extends javax.swing.JFrame {
                 AdminForm.correlativo ++;
         
 //  ORDENAMIENTO ---------------------------------------------------------------
-        
-    tiempos();
-     puntajes();
+     
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -326,7 +324,7 @@ public class PlayerForm extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -350,7 +348,7 @@ public class PlayerForm extends javax.swing.JFrame {
         });
     }
     
-    public void tiempos(){
+    public static void tiempos(){
         double tiempo[] = new double[10];
         String user[] = new String[10];
         
@@ -375,6 +373,7 @@ public class PlayerForm extends javax.swing.JFrame {
                 System.out.print(tiempo[i] + " - ");
                 System.out.println(user[i]);
         }
+        reporte_tiempos(user, tiempo); 
 //         File f;
 //        f = new File("Top10_tiempo.txt");
 //        try{
@@ -425,9 +424,9 @@ public class PlayerForm extends javax.swing.JFrame {
         
     }
     
-    public void puntajes(){
+    public static void puntajes(){
         double puntos[] = new double[10];
-        String user[] = new String[10];
+        String user1[] = new String[10];
         
         for (int i = 0; i < 10; i++) {
             if(AdminForm.puntaje[0][i] != null){
@@ -440,7 +439,7 @@ public class PlayerForm extends javax.swing.JFrame {
             for (int j = 0; j < 10; j++) {
                 if(AdminForm.puntaje[0][i] != null){
                     if(Double.valueOf(String.valueOf(AdminForm.puntaje[1][i]))== puntos[j]){
-                        user[j] = String.valueOf(AdminForm.puntaje[0][i]);
+                        user1[j] = String.valueOf(AdminForm.puntaje[0][i]);
                     }
                 }
             }
@@ -448,9 +447,108 @@ public class PlayerForm extends javax.swing.JFrame {
         
         for (int i = 0; i < puntos.length; i++) {
                 System.out.print(puntos[i] + " - ");
-                System.out.println(user[i]);
+                System.out.println(user1[i]);
         }
+        reporte_puntos(user1, puntos); 
     }
+    private static void reporte_tiempos(String a[], double b[]) {
+    try {
+        java.io.FileOutputStream archivo = new java.io.FileOutputStream("tiempos.html");
+        archivo.write("<html> \n".getBytes());
+        archivo.write("<head>\n".getBytes());
+        archivo.write("<title> Reporte tiempos</title>\n".getBytes());
+        archivo.write("<meta charset=\"UTF-8\">\n".getBytes());
+        archivo.write("</head>\n".getBytes());
+        archivo.write("<body background = 1.png>\n".getBytes());
+        archivo.write("<center>\n".getBytes());
+        archivo.write("<h1>.</h1>\n".getBytes());
+        archivo.write("<h2>.</h2>\n".getBytes());
+        archivo.write("</center>\n".getBytes());
+        
+        archivo.write("<table align=center border = 1>\n".getBytes());
+        archivo.write("<tr>\n".getBytes());
+        archivo.write("<td>No.</td>\n".getBytes());
+        archivo.write("<td>Nombre</td>\n".getBytes());
+        archivo.write("<td>Tiempo</td>\n".getBytes());
+        archivo.write("</tr>\n".getBytes());
+
+
+        for (int i = 0; i <= 9; i++) {
+
+                archivo.write(("<tr>\n").getBytes());
+
+                archivo.write(("<td> "+ (i+1) + "</td>\n").getBytes());
+                    archivo.write(("<td> "+ a[9-i] + "</td>\n").getBytes());
+                
+                archivo.write(("<td> "+b[9-i]+ "</td>\n").getBytes());
+
+                archivo.write("</tr>\n".getBytes());
+
+        }
+
+        archivo.write("<center>\n.".getBytes());
+        archivo.write("</center>\n.".getBytes());
+
+        archivo.write("</table>\n".getBytes());
+        archivo.write("</body>\n".getBytes());
+        archivo.write("</html>".getBytes());
+        Runtime.getRuntime().exec("explorer.exe tiempos.html");
+
+
+    } catch (java.io.IOException e) {
+        System.out.println(e);
+    }
+    }
+    
+    private static void reporte_puntos(String a[], double b[]) {
+   try {
+        java.io.FileOutputStream archivo = new java.io.FileOutputStream("puntaje.html");
+        archivo.write("<html> \n".getBytes());
+        archivo.write("<head>\n".getBytes());
+        archivo.write("<title> Reporte Puntajes</title>\n".getBytes());
+        archivo.write("<meta charset=\"UTF-8\">\n".getBytes());
+        archivo.write("</head>\n".getBytes());
+        archivo.write("<body background = 2.png>\n".getBytes());
+        archivo.write("<center>\n".getBytes());
+        archivo.write("<h1>.</h1>\n".getBytes());
+        archivo.write("<h2>.</h2>\n".getBytes());
+        archivo.write("</center>\n".getBytes());
+        
+        archivo.write("<table align=center border = 1>\n".getBytes());
+        archivo.write("<tr>\n".getBytes());
+        archivo.write("<td>No.</td>\n".getBytes());
+        archivo.write("<td>Nombre</td>\n".getBytes());
+        archivo.write("<td>Puntaje</td>\n".getBytes());
+        archivo.write("</tr>\n".getBytes());
+
+
+        for (int i = 0; i <= 9; i++) {
+
+                archivo.write(("<tr>\n").getBytes());
+
+                archivo.write(("<td> "+ (i+1) + "</td>\n").getBytes());
+                    archivo.write(("<td> "+ a[9-i] + "</td>\n").getBytes());
+                
+                archivo.write(("<td> "+b[9-i]+ "</td>\n").getBytes());
+
+                archivo.write("</tr>\n".getBytes());
+
+        }
+
+        archivo.write("<center>\n.".getBytes());
+        archivo.write("</center>\n.".getBytes());
+
+        archivo.write("</table>\n".getBytes());
+        archivo.write("</body>\n".getBytes());
+        archivo.write("</html>".getBytes());
+        Runtime.getRuntime().exec("explorer.exe puntaje.html");
+
+
+    } catch (java.io.IOException e) {
+        System.out.println(e);
+    }
+}
+    
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
