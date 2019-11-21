@@ -5,6 +5,14 @@
  */
 package orga.practica_04;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aiyel
@@ -17,6 +25,7 @@ public class PlayerForm extends javax.swing.JFrame {
     public PlayerForm() {
         initComponents();
         this.setLocationRelativeTo(null);
+        System.out.println("___________________________________");
     }
 
     /**
@@ -41,6 +50,7 @@ public class PlayerForm extends javax.swing.JFrame {
         tf_score = new javax.swing.JTextField();
         tf_level = new javax.swing.JTextField();
         tf_user = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("VIBORITA");
@@ -94,12 +104,19 @@ public class PlayerForm extends javax.swing.JFrame {
         jLabel4.setText("Usuario");
 
         tf_time.setEditable(false);
+        tf_time.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_timeActionPerformed(evt);
+            }
+        });
 
         tf_score.setEditable(false);
 
         tf_level.setEditable(false);
 
         tf_user.setEditable(false);
+
+        jLabel5.setText("jLabel5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,19 +147,23 @@ public class PlayerForm extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(tf_time, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tf_score, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tf_level, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tf_user, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(tf_time, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -187,6 +208,7 @@ public class PlayerForm extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null,"VIBORITA 3.0\n Universidad de San Carlos de Guatemala \n" );
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -207,12 +229,36 @@ public class PlayerForm extends javax.swing.JFrame {
             tf_time.setText(String.valueOf(LogIn.loggedPlayer.getTiempo()));
             tf_score.setText(String.valueOf(LogIn.loggedPlayer.getPuntos()));
             tf_level.setText(String.valueOf(LogIn.loggedPlayer.getNivel()));
+            
+            if(LogIn.loggedPlayer.getTiempo() > 0){
+                AdminForm.tiempos[1][AdminForm.correlativo]=String.valueOf(LogIn.loggedPlayer.getTiempo());
+                AdminForm.puntaje[1][AdminForm.correlativo]=String.valueOf(LogIn.loggedPlayer.getPuntos());
+                AdminForm.tiempos[0][AdminForm.correlativo]=LogIn.loggedPlayer.getUsername(); 
+                AdminForm.puntaje[0][AdminForm.correlativo]=LogIn.loggedPlayer.getUsername(); 
+            }
         }else{
             LogIn login = new LogIn();
             this.dispose();
             login.setVisible(true);
         }
+        
+        
+        
+        if(AdminForm.correlativo ==9) 
+                AdminForm.correlativo =0;
+            else
+                AdminForm.correlativo ++;
+        
+//  ORDENAMIENTO ---------------------------------------------------------------
+        
+    tiempos();
+     puntajes();
+        
     }//GEN-LAST:event_formWindowOpened
+
+    private void tf_timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_timeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_timeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,6 +294,109 @@ public class PlayerForm extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void tiempos(){
+        double tiempo[] = new double[10];
+        String user[] = new String[10];
+        
+        for (int i = 0; i < 10; i++) {
+            if(AdminForm.tiempos[0][i] != null){
+                tiempo[i] = Double.valueOf(String.valueOf(AdminForm.tiempos[1][i]));
+            }
+        }
+        Arrays.sort(tiempo); 
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if(AdminForm.tiempos[0][i] != null){
+                    if(Double.valueOf(String.valueOf(AdminForm.tiempos[1][i]))== tiempo[j]){
+                        user[j] = String.valueOf(AdminForm.tiempos[0][i]);
+                    }
+                }
+            }
+        }
+        
+        for (int i = 0; i < tiempo.length; i++) {
+                System.out.print(tiempo[i] + " - ");
+                System.out.println(user[i]);
+        }
+//         File f;
+//        f = new File("Top10_tiempo.txt");
+//        try{
+//            FileWriter filew = new FileWriter(f);
+//            BufferedWriter escibiendo = new BufferedWriter(filew);
+//            PrintWriter codigo = new PrintWriter(escibiendo);  
+//                codigo.append("digraph G {\n");
+//                codigo.append("node [shape=record];");
+//                codigo.append("\nrankdir=TB;\n");
+//                codigo.append("subgraph 1{\n");
+//                codigo.append("struct1 [label=");
+//                codigo.append(" \"<f"+0+"> "+0 );
+//                
+//                for (int i = 1; i < tiempo.length; i++) {
+//                    codigo.append("| <f"+(i)+"> "+i +"\n"+tiempo[9-i]+"\n"+user[9-i]);
+//                }
+//                
+//                
+//                
+//                codigo.append("\n}");
+//                codigo.append("\n}");
+//                codigo.close();
+//        }
+//        catch(IOException e){};
+//        
+//        
+//        
+//        try {
+//
+//            String cmd = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe -Tpng Top10_tiempo.txt -o t.jpg";
+//            Runtime rt = Runtime.getRuntime();
+//            rt.exec(cmd);
+//
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//        
+//        try {
+//            
+//            String cmd = "cmd /C start t.jpg";
+//            Runtime rt = Runtime.getRuntime();
+//            rt.exec(cmd);
+//            
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }        
+//        
+        
+    }
+    
+    public void puntajes(){
+        double puntos[] = new double[10];
+        String user[] = new String[10];
+        
+        for (int i = 0; i < 10; i++) {
+            if(AdminForm.puntaje[0][i] != null){
+                puntos[i] = Double.valueOf(String.valueOf(AdminForm.puntaje[1][i]));
+            }
+        }
+        Arrays.sort(puntos); 
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if(AdminForm.puntaje[0][i] != null){
+                    if(Double.valueOf(String.valueOf(AdminForm.puntaje[1][i]))== puntos[j]){
+                        user[j] = String.valueOf(AdminForm.puntaje[0][i]);
+                    }
+                }
+            }
+        }
+        
+        for (int i = 0; i < puntos.length; i++) {
+                System.out.print(puntos[i] + " - ");
+                System.out.println(user[i]);
+        }
+    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -259,6 +408,7 @@ public class PlayerForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField tf_level;
     private javax.swing.JTextField tf_score;
     private javax.swing.JTextField tf_time;

@@ -63,8 +63,8 @@ public class Administrador extends Usuario {
       return arregloOrdenado;
     }
     
-    public float[] getTopTiempos(){
-        float[] a = new float[this.listaJugadores.size()];
+    public double[] getTopTiempos(){
+        double[] a = new double[this.listaJugadores.size()];
         int contador = 0;
         for(Jugador j: this.listaJugadores){
             a[contador] = j.getTiempo();
@@ -73,9 +73,9 @@ public class Administrador extends Usuario {
         return ordenarTopTiempos(a);
     }
     
-    public float[] ordenarTopTiempos(float[] arreglo){
-      float auxiliar;
-      float[] arregloOrdenado;
+    public double[] ordenarTopTiempos(double[] arreglo){
+      double auxiliar;
+      double[] arregloOrdenado;
       for(int i = 2; i < arreglo.length; i++)
       {
         for(int j = 0;j < arreglo.length-i;j++)

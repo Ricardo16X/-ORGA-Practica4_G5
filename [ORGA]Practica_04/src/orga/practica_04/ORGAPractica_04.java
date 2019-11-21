@@ -18,8 +18,9 @@ public class ORGAPractica_04 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        //Instancia de la ventana principal del juego:
+        LogIn loginInicio = new LogIn();
+        loginInicio.setVisible(true);
+        //
         /*LogIn loginInicio = new LogIn();
         loginInicio.setVisible(true);
         int i = (int) (Math.random() * 5) + 1;
@@ -28,8 +29,8 @@ public class ORGAPractica_04 {
             i = (int) (Math.random() * 5) + 1;
         }
         */
-        PantallaJuego n = new PantallaJuego();
-        n.setVisible(true);
+        //PantallaJuego n = new PantallaJuego();
+        //n.setVisible(true);
     }
     
 }
