@@ -243,16 +243,10 @@ public class PlayerForm extends javax.swing.JFrame {
         }
         
         
-        
-        if(AdminForm.correlativo ==9) 
-                AdminForm.correlativo =0;
+        if(AdminForm.correlativo ==0) 
+                AdminForm.correlativo =9;
             else
-                AdminForm.correlativo ++;
-        
-//  ORDENAMIENTO ---------------------------------------------------------------
-        
-    tiempos();
-     puntajes();
+                AdminForm.correlativo --;
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -295,7 +289,7 @@ public class PlayerForm extends javax.swing.JFrame {
         });
     }
     
-    public void tiempos(){
+    public static void tiempos(){
         double tiempo[] = new double[10];
         String user[] = new String[10];
         
@@ -320,57 +314,11 @@ public class PlayerForm extends javax.swing.JFrame {
                 System.out.print(tiempo[i] + " - ");
                 System.out.println(user[i]);
         }
-//         File f;
-//        f = new File("Top10_tiempo.txt");
-//        try{
-//            FileWriter filew = new FileWriter(f);
-//            BufferedWriter escibiendo = new BufferedWriter(filew);
-//            PrintWriter codigo = new PrintWriter(escibiendo);  
-//                codigo.append("digraph G {\n");
-//                codigo.append("node [shape=record];");
-//                codigo.append("\nrankdir=TB;\n");
-//                codigo.append("subgraph 1{\n");
-//                codigo.append("struct1 [label=");
-//                codigo.append(" \"<f"+0+"> "+0 );
-//                
-//                for (int i = 1; i < tiempo.length; i++) {
-//                    codigo.append("| <f"+(i)+"> "+i +"\n"+tiempo[9-i]+"\n"+user[9-i]);
-//                }
-//                
-//                
-//                
-//                codigo.append("\n}");
-//                codigo.append("\n}");
-//                codigo.close();
-//        }
-//        catch(IOException e){};
-//        
-//        
-//        
-//        try {
-//
-//            String cmd = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe -Tpng Top10_tiempo.txt -o t.jpg";
-//            Runtime rt = Runtime.getRuntime();
-//            rt.exec(cmd);
-//
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        
-//        try {
-//            
-//            String cmd = "cmd /C start t.jpg";
-//            Runtime rt = Runtime.getRuntime();
-//            rt.exec(cmd);
-//            
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }        
-//        
         
+        reporte_tiempos(user, tiempo); 
     }
     
-    public void puntajes(){
+    public static void puntajes(){
         double puntos[] = new double[10];
         String user[] = new String[10];
         
@@ -395,8 +343,108 @@ public class PlayerForm extends javax.swing.JFrame {
                 System.out.print(puntos[i] + " - ");
                 System.out.println(user[i]);
         }
+        reporte_tiempos(user, puntos); 
     }
   
+    
+    private static void reporte_tiempos(String a[], double b[]) {
+    try {
+        java.io.FileOutputStream archivo = new java.io.FileOutputStream("tiempos.html");
+        archivo.write("<html> \n".getBytes());
+        archivo.write("<head>\n".getBytes());
+        archivo.write("<title> reporte tiempos</title>\n".getBytes());
+        archivo.write("<meta charset=\"UTF-8\">\n".getBytes());
+        archivo.write("</head>\n".getBytes());
+        archivo.write("<body>\n".getBytes());
+        archivo.write("<center>\n".getBytes());
+        archivo.write("<h1>Top 10 de los jugadores con mayor tiempo</h1>\n".getBytes());
+        archivo.write("</center>\n".getBytes());
+
+        archivo.write("<table align=center border = 1>\n".getBytes());
+        archivo.write("<tr>\n".getBytes());
+        archivo.write("<td>No.</td>\n".getBytes());
+        archivo.write("<td>Nombre</td>\n".getBytes());
+        archivo.write("<td>Tiempo</td>\n".getBytes());
+        archivo.write("</tr>\n".getBytes());
+
+
+        for (int i = 0; i <= 9; i++) {
+
+                archivo.write(("<tr>\n").getBytes());
+
+                archivo.write(("<td> "+ (i+1) + "</td>\n").getBytes());
+                    archivo.write(("<td> "+ a[9-i] + "</td>\n").getBytes());
+                
+                archivo.write(("<td> "+b[9-i]+ "</td>\n").getBytes());
+
+                archivo.write("</tr>\n".getBytes());
+
+        }
+
+        archivo.write("<center>\n.".getBytes());
+        archivo.write("</center>\n.".getBytes());
+
+        archivo.write("</table>\n".getBytes());
+        archivo.write("</body>\n".getBytes());
+        archivo.write("</html>".getBytes());
+        Runtime.getRuntime().exec("explorer.exe tiempos.html");
+
+
+    } catch (java.io.IOException e) {
+        System.out.println(e);
+    }
+    }
+    
+    private static void reporte_puntos(String a[], double b[]) {
+    try {
+        java.io.FileOutputStream archivo = new java.io.FileOutputStream("puntos.html");
+        archivo.write("<html> \n".getBytes());
+        archivo.write("<head>\n".getBytes());
+        archivo.write("<title> reporte tiempos</title>\n".getBytes());
+        archivo.write("<meta charset=\"UTF-8\">\n".getBytes());
+        archivo.write("</head>\n".getBytes());
+        archivo.write("<body>\n".getBytes());
+        archivo.write("<center>\n".getBytes());
+        archivo.write("<h1>Top 10 de los jugadores con mayor puntaje</h1>\n".getBytes());
+        archivo.write("</center>\n".getBytes());
+
+        archivo.write("<table align=center border = 1>\n".getBytes());
+        archivo.write("<tr>\n".getBytes());
+        archivo.write("<td>No.</td>\n".getBytes());
+        archivo.write("<td>Nombre</td>\n".getBytes());
+        archivo.write("<td>Puntaje</td>\n".getBytes());
+        archivo.write("</tr>\n".getBytes());
+
+
+        for (int i = 0; i <= 9; i++) {
+
+                archivo.write(("<tr>\n").getBytes());
+
+                archivo.write(("<td> "+ (i+1) + "</td>\n").getBytes());
+                if(a[9-1]==null)
+                    archivo.write(("<td> "+ a[9-i] + "</td>\n").getBytes());
+                else
+                    archivo.write(("<td> </td>\n").getBytes());
+                
+                archivo.write(("<td> "+b[9-i]+ "</td>\n").getBytes());
+
+                archivo.write("</tr>\n".getBytes());
+
+        }
+
+        archivo.write("<center>\n.".getBytes());
+        archivo.write("</center>\n.".getBytes());
+
+        archivo.write("</table>\n".getBytes());
+        archivo.write("</body>\n".getBytes());
+        archivo.write("</html>".getBytes());
+        Runtime.getRuntime().exec("explorer.exe puntos.html");
+
+
+    } catch (java.io.IOException e) {
+        System.out.println(e);
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
