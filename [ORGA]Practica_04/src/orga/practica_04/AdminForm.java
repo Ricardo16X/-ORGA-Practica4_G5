@@ -13,7 +13,7 @@ public class AdminForm extends javax.swing.JFrame {
 
     public static  Object puntaje[][] = new Object[2][10];
     public static  Object tiempos[][] = new Object[2][10];
-    public static int correlativo;
+    public static int correlativo=9;
     
         
     /**
@@ -58,6 +58,11 @@ public class AdminForm extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
         jButton2.setText("TOP10 PUNTOS");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
         jButton3.setText("ELIMINAR USUARIO");
@@ -167,8 +172,13 @@ public class AdminForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        PlayerForm.tiempos();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        PlayerForm.puntajes();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
