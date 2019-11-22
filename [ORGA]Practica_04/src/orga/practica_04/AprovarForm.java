@@ -40,11 +40,7 @@ public class AprovarForm extends javax.swing.JFrame {
             public String getElementAt(int i) { return b[i]; }
             });
         
-        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-        public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-            jList1ValueChanged(evt);
-            }
-        });
+        
         
         jList1.repaint();
     }

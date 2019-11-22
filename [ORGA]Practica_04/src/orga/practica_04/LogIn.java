@@ -16,7 +16,7 @@ public class LogIn extends javax.swing.JFrame {
 
     
     public static Administrador admin = new Administrador("Admin_ORGA","12345");
-    private Jugador p = new Jugador("carlso","ff");
+    //private Jugador p = new Jugador("carlso","ff");
     
     public static Jugador loggedPlayer;
     /**
@@ -173,8 +173,17 @@ public class LogIn extends javax.swing.JFrame {
             admin_form.setVisible(true);
         }else{
             for(Jugador j: LogIn.admin.getListaJugadores()){
-                int a = 0;
+                //int a = 0;
                 if(j.getUsername().equals(tf_username.getText()) && j.getPassword().equals(password)){
+                    if(j.isAceptado()){
+                        PlayerForm player_form = new PlayerForm();
+                        this.dispose();
+                        loggedPlayer = j;
+                        player_form.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null,"La solicitud del jugador aún no ha sido aprovada por el administador!");
+                    }
+                    /*
                     if(LogIn.admin.getListaJugadores().get(a).isAceptado()==true){
                         PlayerForm player_form = new PlayerForm();
                         this.dispose();
@@ -184,9 +193,10 @@ public class LogIn extends javax.swing.JFrame {
                     }else{
                         JOptionPane.showMessageDialog(null,"La solicitud del jugador aún no ha sido aprovada por el administador!");
                     }
+                    */
                     return;
                 }
-                a++;
+                //a++;
             }
             JOptionPane.showMessageDialog(null,"El usuario ingresado no existe o la contraseña es incorrecta!");
         

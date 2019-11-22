@@ -284,6 +284,7 @@ public class PlayerForm extends javax.swing.JFrame {
         LogIn login = new LogIn();
         this.dispose();
         login.setVisible(true);
+        LogIn.loggedPlayer = null;
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
