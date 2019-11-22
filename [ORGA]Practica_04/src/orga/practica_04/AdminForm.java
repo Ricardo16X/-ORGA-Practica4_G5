@@ -72,7 +72,7 @@ public class AdminForm extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 14)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/orga/practica_04/grupo.png"))); // NOI18N
         jButton5.setText("Ver usuarios");
         jButton5.addActionListener(new java.awt.event.ActionListener() {

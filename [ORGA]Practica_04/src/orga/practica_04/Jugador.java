@@ -52,6 +52,9 @@ public class Jugador extends Usuario {
     public boolean isAceptado() {
         return estado;
     }
+    public boolean isRechazado() {
+        return estado;
+    }
 
     public void setEstado(boolean estado) {
         this.estado = estado;
